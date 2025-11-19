@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { Breadcrumb } from '../components/UI';
 import { DropletIcon, InfoIcon, LeafIcon, XIcon } from '../components/Icons';
@@ -12,7 +11,7 @@ const RecoveryWateringView = ({ onBack }: { onBack: () => void }) => {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-[1600px] animate-fade-in">
+    <div className="container mx-auto px-4 pb-8 max-w-[1600px] animate-fade-in">
        <Breadcrumb 
             onNavigate={onBack}
             items={[

@@ -8,7 +8,7 @@ const LegalView = ({ onBack, content }: { onBack: () => void, content: LegalPage
   }, [content]);
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20 pt-24 md:pt-32">
+    <div className="min-h-screen bg-gray-50 pb-20">
        <div className="container mx-auto px-4 max-w-5xl animate-fade-in">
            <div className="mb-8">
                 <Breadcrumb 

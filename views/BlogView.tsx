@@ -23,7 +23,7 @@ const BlogView = ({ onBack }: { onBack: () => void }) => {
   const otherPosts = BLOG_POSTS.slice(1);
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20 pt-20">
+    <div className="min-h-screen bg-gray-50 pb-20">
       <div className="container mx-auto px-4 max-w-screen-2xl animate-fade-in">
         <Breadcrumb
           onNavigate={onBack}

@@ -47,7 +47,7 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
     };
 
     return (
-        <div className="container mx-auto px-4 py-8 max-w-[1800px] animate-fade-in relative">
+        <div className="container mx-auto px-4 pb-8 max-w-[1800px] animate-fade-in relative">
             <div className="mb-6">
                 <Breadcrumb
                     onNavigate={onBack}

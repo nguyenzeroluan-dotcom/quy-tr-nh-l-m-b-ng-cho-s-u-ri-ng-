@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import CarouselHeader from '../features/Header';
+import CarouselHeader from '../features/CarouselHeader';
 import TimelineCard from '../features/TimelineCard';
 import { timelineData } from '../data/timeline';
 import { TimelineItemData } from '../types';
