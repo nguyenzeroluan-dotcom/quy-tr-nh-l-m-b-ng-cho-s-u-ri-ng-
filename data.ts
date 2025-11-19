@@ -151,6 +151,20 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
       ],
       usage: "Pha 1 gói 25g với 200 lít nước, phun đều trên cây."
   },
+  "phan_bo_vi_sinh": {
+    id: "phan_bo_vi_sinh",
+    category: "nutrition",
+    name: "Phân Bò Hữu Cơ Vi Sinh",
+    imageUrl: "https://sfarm.vn/wp-content/uploads/2024/11/che-pham-vi-sinh-la-gi-cong-dung-cach-dung-1-scaled.jpg",
+    description: "Phân bò được xử lý với quy trình kỹ thuật cao, chứa các vi sinh vật có lợi giúp phân giải Cellulose và kháng bệnh trong đất.",
+    benefits: [
+        "Bổ sung vi sinh vật có lợi, đối kháng nấm bệnh.",
+        "Phân giải nhanh xác bã thực vật, Cellulose, tăng mùn cho đất.",
+        "Giúp đất tơi xốp, cải tạo cấu trúc đất hiệu quả.",
+        "Cung cấp dinh dưỡng hữu cơ bền vững cho cây trồng."
+    ],
+    usage: "Bón lót hoặc bón thúc quanh gốc, liều lượng tùy theo độ tuổi và tình trạng cây."
+  },
 
   // --- BẢO VỆ THỰC VẬT (PROTECTION) ---
   "ck180": {
