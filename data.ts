@@ -13,6 +13,7 @@ export type RichStep = {
   icon?: React.FC<{ className?: string }>;
   imageUrl?: string;
   hoverDetail?: string;
+  subPageId?: string; // Added for linking to dedicated sub-pages
 };
 
 export type TimelineItemData = {
@@ -89,7 +90,8 @@ export const timelineData: TimelineItemData[] = [
         {
           title: "Tưới phục hồi & Nâng pH",
           content: "Cung cấp dinh dưỡng dễ hấp thu để cây hồi sức, đồng thời nâng pH đất lên ngưỡng thích hợp (5.5 - 6.5) giúp rễ hấp thu khoáng chất tối đa.",
-          icon: DropletIcon
+          icon: DropletIcon,
+          subPageId: "recovery-watering"
         },
         {
           title: "Phân hủy hữu cơ",

@@ -5,9 +5,9 @@ import { PHGuideModal } from '../features/PHModal';
 import { BaseModal } from '../components/Modal';
 import FarmersmartLogo from '../components/Logo';
 import { Breadcrumb, StageBadge } from '../components/UI';
-import { SprayIcon, CheckCircleIcon, InfoIcon, LeafIcon, BookOpenIcon } from '../components/Icons';
+import { SprayIcon, CheckCircleIcon, InfoIcon, LeafIcon, BookOpenIcon, ChevronRightIcon } from '../components/Icons';
 
-const DetailView = ({ item, onBack }: { item: TimelineItemData, onBack: () => void }) => {
+const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemData, onBack: () => void, onNavigateToSubPage: (id: string) => void }) => {
     const [selectedStep, setSelectedStep] = useState<RichStep | null>(null);
     const [showPHModal, setShowPHModal] = useState(false);
 
@@ -159,6 +159,23 @@ const DetailView = ({ item, onBack }: { item: TimelineItemData, onBack: () => vo
               title={selectedStep?.title || "Chi Tiết"}
               initialWidth={600}
               initialHeight={500}
+              footer={
+                  selectedStep?.subPageId ? (
+                      <div className="w-full flex justify-end">
+                        <button 
+                            onClick={() => {
+                                if (selectedStep.subPageId) {
+                                    onNavigateToSubPage(selectedStep.subPageId);
+                                    setSelectedStep(null);
+                                }
+                            }}
+                            className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors shadow-md"
+                        >
+                            Xem Chi Tiết Quy Trình <ChevronRightIcon className="w-4 h-4" />
+                        </button>
+                      </div>
+                  ) : undefined
+              }
             >
                {selectedStep && (
                  <div className="space-y-4">
@@ -169,11 +186,11 @@ const DetailView = ({ item, onBack }: { item: TimelineItemData, onBack: () => vo
                     )}
                     <div className="prose prose-green max-w-none">
                         <h4 className="text-xl font-bold text-green-800 mb-2">Mô tả chi tiết</h4>
-                        <p className="text-gray-700 text-lg leading-relaxed">
+                        <p className="text-gray-700 text-lg leading-relaxed whitespace-pre-line">
                             {selectedStep.content}
                         </p>
                     </div>
-                    {/* Render additional hoverDetail if different from content, but here content is the main part */}
+                    {/* Render additional hoverDetail if different from content */}
                     {selectedStep.hoverDetail && selectedStep.hoverDetail !== selectedStep.content && (
                          <div className="bg-green-50 p-4 rounded-lg border border-green-100 text-sm text-gray-600 italic">
                              {selectedStep.hoverDetail}
