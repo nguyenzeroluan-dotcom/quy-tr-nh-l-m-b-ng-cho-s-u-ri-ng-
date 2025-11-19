@@ -5,12 +5,14 @@ import TimelineCard from '../features/TimelineCard';
 import { timelineData, TimelineItemData } from '../data';
 import { FilterButton, BackToTopButton } from '../components/UI';
 import FarmersmartLogo from '../components/Logo';
+import { BookOpenIcon } from '../components/Icons';
 
 interface ListViewProps {
   onItemClick: (item: TimelineItemData) => void;
+  onNavigateToBlog: () => void;
 }
 
-const ListView: React.FC<ListViewProps> = ({ onItemClick }) => {
+const ListView: React.FC<ListViewProps> = ({ onItemClick, onNavigateToBlog }) => {
   const [filter, setFilter] = useState('all');
   
   // Smart Header State
@@ -113,15 +115,35 @@ const ListView: React.FC<ListViewProps> = ({ onItemClick }) => {
 
       {/* Footer */}
       <footer className="bg-green-900 text-green-300 py-12">
-         <div className="container mx-auto px-4 text-center">
-            <div className="flex justify-center mb-6">
-                <FarmersmartLogo className="h-12 w-auto text-white" light={true} />
+         <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-3 gap-8 mb-8 text-center md:text-left">
+                <div className="flex flex-col items-center md:items-start">
+                     <FarmersmartLogo className="h-12 w-auto text-white mb-4" light={true} />
+                     <p className="text-sm text-green-200">Đồng hành cùng nhà nông kiến tạo nền nông nghiệp bền vững.</p>
+                </div>
+                
+                <div className="flex flex-col items-center md:items-start">
+                     <h3 className="text-white font-bold text-lg mb-4">Liên Hệ</h3>
+                     <p className="mb-2">Địa chỉ: Ấp Tân Long, Xã Tân Dương, Tỉnh Đồng Tháp</p>
+                     <p className="mb-2">Hotline: <span className="text-white font-bold">0908.119.987</span></p>
+                </div>
+
+                <div className="flex flex-col items-center md:items-start">
+                    <h3 className="text-white font-bold text-lg mb-4">Thông Tin Hữu Ích</h3>
+                    <button 
+                        onClick={onNavigateToBlog}
+                        className="flex items-center gap-2 text-green-200 hover:text-white hover:underline transition-colors mb-2"
+                    >
+                        <BookOpenIcon className="w-4 h-4" /> Blog & Kỹ Thuật Canh Tác
+                    </button>
+                    <a href="#" className="text-green-200 hover:text-white hover:underline transition-colors mb-2">Chính sách bảo mật</a>
+                    <a href="#" className="text-green-200 hover:text-white hover:underline transition-colors">Điều khoản sử dụng</a>
+                </div>
             </div>
-            <h2 className="text-2xl font-bold text-white mb-4">Công Ty Cổ Phần Farmersmart</h2>
-            <p className="mb-2">Địa chỉ: Ấp Tân Long, Xã Tân Dương, Tỉnh Đồng Tháp</p>
-            <p className="mb-6">Hotline: 0908.119.987</p>
-            <div className="border-t border-green-800 pt-6 text-sm">
-               <p>Lưu ý: Quy trình và liều lượng có thể thay đổi tùy theo diễn biến thực tế của thời tiết và sức khỏe cây trồng.</p>
+
+            <div className="border-t border-green-800 pt-6 text-center text-sm text-green-400">
+               <p>© 2025 Công Ty Cổ Phần Farmersmart. All rights reserved.</p>
+               <p className="mt-2 text-xs italic opacity-70">Lưu ý: Quy trình và liều lượng có thể thay đổi tùy theo diễn biến thực tế của thời tiết và sức khỏe cây trồng.</p>
             </div>
          </div>
       </footer>
