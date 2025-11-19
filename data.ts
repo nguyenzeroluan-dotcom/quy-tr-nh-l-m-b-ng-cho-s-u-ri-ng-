@@ -170,13 +170,13 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
   "ck180": {
       id: "ck180",
       category: "protection",
-      name: "FMS - CÂY KHOẺ 180 (Nano Chitosan)",
+      name: "FMS - CÂY KHOẺ 180",
       imageUrl: "https://cf.shopee.vn/file/d3860b86836e41188690946692197851", // Placeholder
-      description: "Vắc xin thực vật - Phòng trừ nấm bệnh và vi khuẩn.",
+      description: "Tập đoàn vi sinh vật có lợi, chuyên đối kháng với các vi sinh vật gây hại trong đất và trên lá.",
       benefits: [
-          "Cô lập vết bệnh, ngăn chặn nấm khuẩn lây lan.",
-          "Kích thích cơ chế tự vệ của cây trồng.",
-          "An toàn, không gây kháng thuốc."
+          "Đối kháng, ức chế sự phát triển của nấm bệnh và vi khuẩn có hại như Phytophthora, Fusarium.",
+          "Tạo ra một lớp màng bảo vệ sinh học xung quanh rễ và trên bề mặt lá.",
+          "An toàn cho cây trồng, con người và môi trường, không gây kháng thuốc."
       ],
       usage: "Pha 1 lít với 400 lít nước, phun đều hoặc tưới gốc."
   },

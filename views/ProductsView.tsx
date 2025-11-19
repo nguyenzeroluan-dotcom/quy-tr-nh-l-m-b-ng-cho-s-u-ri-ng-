@@ -1,7 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import { Breadcrumb, FilterButton } from '../components/UI';
-import { ProductInfo, PRODUCT_DB, CATEGORY_LABELS } from '../data';
+import { ProductInfo } from '../types';
+import { PRODUCT_DB, CATEGORY_LABELS } from '../data/products';
 import { BaseModal } from '../components/Modal';
 import { ProductModal } from '../components/ProductModal';
 import { CheckCircleIcon, LeafIcon, SprayIcon, DropletIcon } from '../components/Icons';

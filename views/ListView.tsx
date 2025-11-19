@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import CarouselHeader from '../features/Header';
 import TimelineCard from '../features/TimelineCard';
-import { timelineData, TimelineItemData } from '../data';
+import { timelineData } from '../data/timeline';
+import { TimelineItemData } from '../types';
 import { FilterButton, BackToTopButton } from '../components/UI';
 import FarmersmartLogo from '../components/Logo';
 import { BookOpenIcon, LeafIcon } from '../components/Icons';

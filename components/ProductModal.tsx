@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { BaseModal } from './Modal';
-import { ProductInfo } from '../data';
+import { ProductInfo } from '../types';
 import { CheckCircleIcon } from './Icons';
 
 export const ProductModal = ({ isOpen, onClose, product }: { isOpen: boolean, onClose: () => void, product: ProductInfo | null }) => {

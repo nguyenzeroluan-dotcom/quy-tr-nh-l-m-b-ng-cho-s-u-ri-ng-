@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect, useRef } from 'react';
-import { TimelineItemData } from './data';
+import { TimelineItemData } from './types';
 import { LegalPageContent, PRIVACY_POLICY_CONTENT, TERMS_OF_USE_CONTENT } from './legal-data';
 import ListView from './views/ListView';
 import DetailView from './views/DetailView';

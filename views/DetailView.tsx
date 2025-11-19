@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { TimelineItemData, RichStep, PRODUCT_USAGE_GUIDE, PRODUCT_DB, ProductInfo } from '../data';
+import { TimelineItemData, RichStep, ProductInfo } from '../types';
+import { PRODUCT_USAGE_GUIDE, PRODUCT_DB } from '../data/products';
 import { PHGuideModal } from '../features/PHModal';
 import { BaseModal } from '../components/Modal';
 import { ProductModal } from '../components/ProductModal';

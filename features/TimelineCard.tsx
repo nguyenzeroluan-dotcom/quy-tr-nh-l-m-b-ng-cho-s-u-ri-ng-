@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { TimelineItemData } from '../data';
+import { TimelineItemData } from '../types';
 import { FlowerIcon, ChevronRightIcon } from '../components/Icons';
 import { ImagePlaceholder, StageBadge } from '../components/UI';
 
