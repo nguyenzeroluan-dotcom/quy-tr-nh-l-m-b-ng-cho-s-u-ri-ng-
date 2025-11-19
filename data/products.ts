@@ -108,6 +108,22 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
     ],
     usage: "Bón lót hoặc bón thúc quanh gốc, liều lượng tùy theo độ tuổi và tình trạng cây."
   },
+   "npk_10_60_10": {
+    id: "npk_10_60_10",
+    category: "nutrition",
+    name: "Phân Bón Lá AC NPK 10-60-10 + TE",
+    imageUrl: "https://product.hstatic.net/1000269461/product/ac-10-60-10_a77e55890ae641569dbf97ea125e5de7.jpg",
+    description: "Phân bón lá chuyên gia tạo mầm hoa với hàm lượng Lân cao giúp tạo mầm hoa cực mạnh, bật mầm hoa, hoa to, trổ đồng loạt, chống khô bông và rụng bông.",
+    benefits: [
+      "Hàm lượng lân cực cao giúp hình thành nhiều mầm hoa.",
+      "Giúp cây trổ nhiều hoa, hoa trổ đồng loạt, bông hoa to, cánh hoa dày.",
+      "Chống rụng hoa, khô hoa, hạn chế nghẽn bông.",
+      "Hạ phèn nhanh, kích thích ra rễ mạnh, giúp bộ rễ phát triển khỏe.",
+      "Kích thích cây đâm chồi, nhú mầm.",
+      "Giúp hạt phấn khỏe, tăng khả năng đậu trái."
+    ],
+    usage: "Pha 5-10g/8 lít nước, định kỳ 7-10 ngày/lần. Tưới vào sáng sớm hoặc chiều mát."
+  },
    "kno3": {
     id: "kno3",
     category: "nutrition",
@@ -138,6 +154,19 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
   },
 
   // --- BẢO VỆ THỰC VẬT (PROTECTION) ---
+  "trichoderma": {
+      id: "trichoderma",
+      category: "protection",
+      name: "Trichoderma (Tưới Gốc)",
+      imageUrl: "https://api-static.bacsicayxanh.vn/pictures/0001591_trichoderma.jpeg.webp",
+      description: "Chế phẩm vi sinh nấm đối kháng Trichoderma, giúp phân giải hữu cơ, ủ phân, và đặc biệt là phòng ngừa hiệu quả các bệnh về rễ như vàng lá, thối rễ do nấm Phytophthora, Fusarium gây ra.",
+      benefits: [
+          "Ủ phân chuồng, vỏ cà phê, xác thực vật nhanh và hiệu quả.",
+          "Diệt các mầm bệnh có trong đất, nguyên liệu, hạn chế các nấm bệnh phát triển.",
+          "Phòng ngừa các bệnh về vàng lá thối rễ, tuyến trùng do nấm Phytophthora và Fusarium gây nên."
+      ],
+      usage: "Pha với nước theo liều lượng khuyến cáo và tưới đều quanh gốc. Dùng để ủ phân hoặc xử lý đất trước khi trồng."
+  },
   "ck90": {
       id: "ck90",
       category: "protection",
@@ -194,7 +223,9 @@ export const findProductByName = (text: string): ProductInfo | null => {
        "combi": "combi", "lactobio": "lactobio",
        "phân bò vi sinh": "phan_bo_vi_sinh", "dm15": "ph_meter_dm15",
        "ph": "litmus_paper",
-       "kno3": "kno3"
+       "kno3": "kno3",
+       "trichoderma": "trichoderma",
+       "10-60-10": "npk_10_60_10"
    };
 
    // 1. Check mapping first
