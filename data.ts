@@ -110,7 +110,7 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
       "Giúp cây kháng được nhiều bệnh gây hại.",
       "Vi sinh phân giải kali – cải thiện chất lượng quả."
     ],
-    usage: "Pha 1kg với 1000 lít nước tưới đẫm."
+    usage: "Pha 1kg với 400 lít nước tưới đẫm để nâng pH. Pha 1kg với 50 lít nước để diệt rong rêu."
   },
   "ck30": {
       id: "ck30",
@@ -222,7 +222,7 @@ export const ProductHelper = {
 // --- Product Usage Dictionary (From Page 3) ---
 export const PRODUCT_USAGE_GUIDE: Record<string, { usage: string, note?: string }> = {
   "Cây khỏe 30": { usage: "Pha 1 lít với 300 lít nước tưới ướt bộ rễ.", note: "Cố định đạm, hòa tan lân, phân giải kali" },
-  "Cây khỏe 70": { usage: "Pha 1kg với 1000 lít nước tưới đẫm.", note: "Nâng pH đất và nước (pH = 6 đến 7 là tốt nhất)" }, // Mapped from CK70
+  "Cây khỏe 70": { usage: "Pha 1kg với 400 lít nước tưới đẫm để nâng pH. Pha 1kg với 50 lít nước để diệt rong rêu.", note: "Nâng pH đất và nước (pH = 6 đến 7 là tốt nhất)" }, // Mapped from CK70
   "Cây khỏe 320": { usage: "Pha 1 lít với 400 lít nước tưới đều gốc cây.", note: "Đạm cá" },
   "Cây khỏe 180": { usage: "Pha 1 lít với 400 lít nước, phun đều trên cây.", note: "Phòng trừ bệnh" }, // Mapped from CK180
   "Cây khỏe 90": { usage: "Pha 1kg với 5 lít nước ngâm qua đêm, sau đó lấy pha với 400 lít nước phun đều trên cây.", note: "Trừ sâu sinh học, quản lý côn trùng" },
@@ -232,7 +232,7 @@ export const PRODUCT_USAGE_GUIDE: Record<string, { usage: string, note?: string 
   "NPK 30-10-10": { usage: "URE = 3,6KG + DAP = 1,8KG + KALI = 0,6KG. Pha 1.500 lít nước tưới chung hệ thống tưới.", note: "Công thức pha 6kg hỗn hợp" },
   "NPK 20-20-15": { usage: "URE = 3KG + DAP = 2,8KG + KALI = 2,2KG. Pha 2.000 lít nước tưới chung hệ thống tưới.", note: "Công thức pha 8kg hỗn hợp" },
   "NPK 13-13-21": { usage: "URE = 2,4KG + DAP = 3KG + KALI = 4,6KG. Pha 2.500 lít nước tưới chung hệ thống tưới.", note: "Công thức pha 10kg hỗn hợp" },
-  "CK70": { usage: "Pha 1kg với 1000 lít nước tưới đẫm.", note: "Nâng pH đất và nước" },
+  "CK70": { usage: "Pha 1kg với 400 lít nước tưới đẫm để nâng pH. Pha 1kg với 50 lít nước để diệt rong rêu.", note: "Nâng pH đất và nước" },
   "CK180": { usage: "Pha 1 lít với 400 lít nước, phun đều trên cây (hoặc tưới gốc phòng bệnh).", note: "Phòng bệnh" },
 };
 
