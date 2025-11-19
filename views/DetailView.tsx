@@ -1,15 +1,22 @@
 
 import React, { useState, useEffect } from 'react';
-import { TimelineItemData, RichStep, PRODUCT_USAGE_GUIDE } from '../data';
+import { TimelineItemData, RichStep, PRODUCT_USAGE_GUIDE, PRODUCT_DB, ProductInfo } from '../data';
 import { PHGuideModal } from '../features/PHModal';
 import { BaseModal } from '../components/Modal';
+import { ProductModal } from '../components/ProductModal';
 import FarmersmartLogo from '../components/Logo';
 import { Breadcrumb, StageBadge } from '../components/UI';
 import { SprayIcon, CheckCircleIcon, InfoIcon, LeafIcon, BookOpenIcon, ChevronRightIcon } from '../components/Icons';
+import ImageViewer from '../components/ImageViewer';
 
 const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemData, onBack: () => void, onNavigateToSubPage: (id: string) => void }) => {
     const [selectedStep, setSelectedStep] = useState<RichStep | null>(null);
     const [showPHModal, setShowPHModal] = useState(false);
+    const [fullScreenImage, setFullScreenImage] = useState<string | null>(null);
+    
+    // Product Modal State
+    const [selectedProduct, setSelectedProduct] = useState<ProductInfo | null>(null);
+    const [showProductModal, setShowProductModal] = useState(false);
 
     // Check if this is the "Xử Lý Đất & Kích Rễ" item (ID 2)
     const isSoilPHItem = item.id === 2;
@@ -20,6 +27,13 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
 
     // Helper to format currency
     const formatCurrency = (val: number) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(val);
+
+    // Helper to check if product exists in DB
+    const getProductKey = (text: string) => {
+       const lower = text.toLowerCase();
+       if (lower.includes('ck70') || lower.includes('cây khỏe 70')) return 'ck70';
+       return null;
+    };
 
     return (
         <div className="container mx-auto px-4 py-8 max-w-4xl animate-fade-in">
@@ -89,6 +103,13 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
 
             {/* PH Guide Modal */}
             <PHGuideModal isOpen={showPHModal} onClose={() => setShowPHModal(false)} />
+            
+            {/* Product Detail Modal */}
+            <ProductModal 
+                isOpen={showProductModal} 
+                onClose={() => setShowProductModal(false)} 
+                product={selectedProduct} 
+            />
 
             {/* Rich Detail Content (if any) */}
             {item.richDetail && (
@@ -150,8 +171,14 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
                {selectedStep && (
                  <div className="space-y-4">
                     {selectedStep.imageUrl && (
-                      <div className="rounded-xl overflow-hidden shadow-md">
-                        <img src={selectedStep.imageUrl} alt={selectedStep.title} className="w-full h-64 object-cover" />
+                      <div 
+                        className="rounded-xl overflow-hidden shadow-md cursor-zoom-in group relative"
+                        onClick={() => setFullScreenImage(selectedStep.imageUrl || null)}
+                      >
+                        <img src={selectedStep.imageUrl} alt={selectedStep.title} className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" />
+                         <div className="absolute bottom-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                            Bấm để xem ảnh lớn
+                        </div>
                       </div>
                     )}
                     <div className="prose prose-green max-w-none">
@@ -163,6 +190,12 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
                  </div>
                )}
             </BaseModal>
+
+            <ImageViewer 
+                isOpen={!!fullScreenImage}
+                imageUrl={fullScreenImage}
+                onClose={() => setFullScreenImage(null)}
+            />
 
             {/* Cost & Usage Table */}
             {item.productDetails && item.productDetails.length > 0 && (
@@ -189,24 +222,45 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200">
-                                {item.productDetails.map((detail, idx) => (
-                                    <tr key={idx} className="hover:bg-gray-50 transition-colors">
-                                        <td className="px-6 py-4 font-medium text-gray-900">{detail.name}</td>
-                                        <td className="px-6 py-4 text-gray-600">{detail.purpose}</td>
-                                        <td className="px-6 py-4 text-gray-600">
-                                            {detail.dosage}
-                                            <span className="text-gray-400 text-xs ml-1">({detail.quantity} {detail.unit})</span>
-                                        </td>
-                                        <td className="px-6 py-4 text-right font-bold text-green-700 group cursor-pointer relative">
-                                            <span className="blur-[5px] group-hover:blur-none transition-all duration-300 select-none">
-                                                {formatCurrency(detail.totalCost)}
-                                            </span>
-                                            <span className="absolute right-6 top-1/2 -translate-y-1/2 text-xs text-gray-400 opacity-100 group-hover:opacity-0 transition-opacity pointer-events-none">
-                                                Hiện giá
-                                            </span>
-                                        </td>
-                                    </tr>
-                                ))}
+                                {item.productDetails.map((detail, idx) => {
+                                    const productKey = getProductKey(detail.name);
+                                    const productInfo = productKey ? PRODUCT_DB[productKey] : null;
+
+                                    return (
+                                        <tr key={idx} className="hover:bg-gray-50 transition-colors">
+                                            <td className="px-6 py-4 font-medium text-gray-900 relative">
+                                                {productInfo ? (
+                                                    <div 
+                                                        className="inline-block cursor-pointer text-green-700 underline decoration-dotted group/product relative"
+                                                        onClick={() => { setSelectedProduct(productInfo); setShowProductModal(true); }}
+                                                    >
+                                                        {detail.name}
+                                                        {/* Hover Image Tooltip */}
+                                                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 hidden group-hover/product:block z-50 w-48 bg-white p-2 rounded-lg shadow-xl border border-gray-200 animate-fade-in pointer-events-none">
+                                                            <img src={productInfo.imageUrl} alt="Preview" className="w-full h-auto rounded border border-gray-100" />
+                                                            <div className="absolute bottom-[-6px] left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-b border-r border-gray-200 transform rotate-45"></div>
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    detail.name
+                                                )}
+                                            </td>
+                                            <td className="px-6 py-4 text-gray-600">{detail.purpose}</td>
+                                            <td className="px-6 py-4 text-gray-600">
+                                                {detail.dosage}
+                                                <span className="text-gray-400 text-xs ml-1">({detail.quantity} {detail.unit})</span>
+                                            </td>
+                                            <td className="px-6 py-4 text-right font-bold text-green-700 group cursor-pointer relative">
+                                                <span className="blur-[5px] group-hover:blur-none transition-all duration-300 select-none">
+                                                    {formatCurrency(detail.totalCost)}
+                                                </span>
+                                                <span className="absolute right-6 top-1/2 -translate-y-1/2 text-xs text-gray-400 opacity-100 group-hover:opacity-0 transition-opacity pointer-events-none">
+                                                    Hiện giá
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
                             </tbody>
                         </table>
                     </div>

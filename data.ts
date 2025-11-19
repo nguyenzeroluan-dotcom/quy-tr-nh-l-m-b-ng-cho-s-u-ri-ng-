@@ -47,6 +47,33 @@ export type TimelineItemData = {
   };
 };
 
+export interface ProductInfo {
+  id: string;
+  name: string;
+  imageUrl: string;
+  description: string;
+  benefits: string[];
+  usage?: string;
+}
+
+// --- Product Database ---
+export const PRODUCT_DB: Record<string, ProductInfo> = {
+  "ck70": {
+    id: "ck70",
+    name: "FMS - CÂY KHOẺ 70",
+    imageUrl: "https://lavish-kitty-16b.notion.site/image/attachment%3A4e4be20e-c1c3-46e2-a646-2a5d9d001ed8%3Ack70.jpg?table=block&id=2b0a0a49-3a08-8007-b34c-d76d683e759b&spaceId=228174f8-4a60-4bbf-b8cf-11db580b1ecb&width=1420&userId=&cache=v2", 
+    description: "VÔI TINH - BÍ QUYẾT HẠ PHÈN, MẶN. > 90% canxi, phụ gia.",
+    benefits: [
+      "Hạ phèn, mặn nhanh chóng sau 30 phút.",
+      "Giúp bộ rễ phát triển.",
+      "Giúp cây hấp thu đầy đủ Đa trung vi lượng.",
+      "Giúp cây kháng được nhiều bệnh gây hại.",
+      "Vi sinh phân giải kali – cải thiện chất lượng quả."
+    ],
+    usage: "Pha 1kg với 1000 lít nước tưới đẫm."
+  }
+};
+
 // --- Product Usage Dictionary (From Page 3) ---
 export const PRODUCT_USAGE_GUIDE: Record<string, { usage: string, note?: string }> = {
   "Cây khỏe 30": { usage: "Pha 1 lít với 300 lít nước tưới ướt bộ rễ.", note: "Cố định đạm, hòa tan lân, phân giải kali" },

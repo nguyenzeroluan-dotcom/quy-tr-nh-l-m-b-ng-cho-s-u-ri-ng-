@@ -1,9 +1,12 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Breadcrumb } from '../components/UI';
 import { DropletIcon, InfoIcon, LeafIcon, XIcon } from '../components/Icons';
+import ImageViewer from '../components/ImageViewer';
 
 const RecoveryWateringView = ({ onBack }: { onBack: () => void }) => {
+  const [viewImage, setViewImage] = useState<string | null>(null);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -60,12 +63,16 @@ const RecoveryWateringView = ({ onBack }: { onBack: () => void }) => {
                    "Bón 10 bao phân ở đất chua chỉ bằng bón 1 bao ở đất tốt."
                 </div>
              </div>
-             <div className="rounded-lg overflow-hidden shadow-lg border border-gray-200">
+             <div 
+                className="rounded-lg overflow-hidden shadow-lg border border-gray-200 cursor-zoom-in group"
+                onClick={() => setViewImage("https://agriplusvn.com/wp-content/uploads/2023/11/muc-do-phat-trien-cua-re-theo-pH.png")}
+             >
                 <img 
                   src="https://agriplusvn.com/wp-content/uploads/2023/11/muc-do-phat-trien-cua-re-theo-pH.png" 
                   alt="Biểu đồ pH" 
-                  className="w-full h-auto object-contain bg-white"
+                  className="w-full h-auto object-contain bg-white transform transition-transform duration-500 group-hover:scale-105"
                 />
+                <p className="text-center text-xs text-gray-500 bg-gray-50 py-1 group-hover:text-green-600">Bấm để xem biểu đồ lớn</p>
              </div>
           </div>
         </div>
@@ -90,10 +97,16 @@ const RecoveryWateringView = ({ onBack }: { onBack: () => void }) => {
                     Cadimi (Cd) là một kim loại nặng cực độc, thường tồn tại tạp chất trong các loại phân bón hóa học (đặc biệt là phân Lân kém chất lượng) hoặc do ô nhiễm nguồn nước.
                  </p>
                  
-                 <div className="mb-4 rounded-lg overflow-hidden border border-gray-200 shadow-sm">
-                    <img src="https://i.ex-cdn.com/nongnghiepmoitruong.vn/files/content/2025/01/16/picture1-094508_787-132852.jpeg" alt="Minh họa Cadimi" className="w-full h-auto object-cover" />
-                    <p className="text-xs text-center text-gray-500 italic p-1 bg-gray-50">Tác động của kim loại nặng lên đất và cây trồng</p>
+                 <div 
+                    className="mb-4 rounded-lg overflow-hidden border border-gray-200 shadow-sm cursor-zoom-in group relative"
+                    onClick={() => setViewImage("https://i.ex-cdn.com/nongnghiepmoitruong.vn/files/content/2025/01/16/picture1-094508_787-132852.jpeg")}
+                 >
+                    <img src="https://i.ex-cdn.com/nongnghiepmoitruong.vn/files/content/2025/01/16/picture1-094508_787-132852.jpeg" alt="Minh họa Cadimi" className="w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-105" />
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs py-1 text-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        Bấm để xem ảnh lớn
+                    </div>
                  </div>
+                 <p className="text-xs text-center text-gray-500 italic mb-4">Tác động của kim loại nặng lên đất và cây trồng</p>
 
                  <h4 className="font-bold text-gray-800 mb-2">Tác hại lên cây sầu riêng:</h4>
                  <ul className="list-disc pl-5 text-gray-700 space-y-2">
@@ -110,9 +123,44 @@ const RecoveryWateringView = ({ onBack }: { onBack: () => void }) => {
                  <span className="text-red-600 text-sm">Của Bộ Rễ Khỏe</span>
               </div>
            </div>
+
+            {/* MECHANISM: HOW pH LOCKS CADMIUM */}
+            <div className="bg-gradient-to-b from-stone-50 to-white p-6 border-b border-gray-100">
+                <h3 className="text-lg font-bold text-blue-900 mb-6 text-center uppercase tracking-wide">
+                    Khi pH Đất Ổn Định (6.0 - 6.5) ➔ Cadimi Bị "Khóa Chặt"
+                </h3>
+                <div className="grid md:grid-cols-3 gap-6">
+                    <div className="bg-white p-4 rounded-lg shadow-sm border border-blue-100 hover:shadow-md transition-shadow">
+                        <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold mb-3 text-lg">1</div>
+                        <h4 className="font-bold text-gray-800 mb-2">Keo Đất Tích Điện Âm (-)</h4>
+                        <p className="text-sm text-gray-600 leading-relaxed">
+                            Khi độ pH của đất tăng lên (tính axit giảm), các hạt keo đất có xu hướng mang điện tích âm (-).
+                        </p>
+                    </div>
+                    
+                    <div className="bg-white p-4 rounded-lg shadow-sm border border-purple-100 hover:shadow-md transition-shadow">
+                        <div className="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold mb-3 text-lg">2</div>
+                        <h4 className="font-bold text-gray-800 mb-2">Lực Hút Tĩnh Điện</h4>
+                        <p className="text-sm text-gray-600 leading-relaxed">
+                            Lúc này, các ion <strong className="text-red-500">Cadimi Cd2+</strong> (điện tích dương) sẽ bị hút và giữ chặt bởi các hạt keo đất.
+                        </p>
+                    </div>
+
+                    <div className="bg-white p-4 rounded-lg shadow-sm border border-green-100 hover:shadow-md transition-shadow">
+                        <div className="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center font-bold mb-3 text-lg">3</div>
+                        <h4 className="font-bold text-gray-800 mb-2">Cố Định & Khó Hấp Thu</h4>
+                        <p className="text-sm text-gray-600 leading-relaxed">
+                            Cadimi bị cố định, ít di chuyển tự do. Khả năng rễ cây hấp thu Cadimi giảm đi đáng kể.
+                        </p>
+                    </div>
+                </div>
+                <div className="mt-4 bg-blue-50 border border-blue-200 p-3 rounded-lg text-center text-blue-800 text-sm italic font-medium">
+                    "Ví dụ minh họa: Khi nâng pH đất, hàm lượng Cadimi trong cây có thể giảm từ mức 0.35 xuống các mức an toàn hơn."
+                </div>
+            </div>
            
            <div className="p-6 bg-green-50">
-              <h4 className="font-bold text-green-800 mb-3">Giải Pháp Kiểm Soát Cadimi:</h4>
+              <h4 className="font-bold text-green-800 mb-3">Giải Pháp Then Chốt Để Giảm Thiểu Nguy Cơ:</h4>
               <div className="grid md:grid-cols-2 gap-4">
                  <div className="bg-white p-4 rounded-lg shadow-sm flex items-start gap-3">
                     <LeafIcon className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
@@ -188,6 +236,11 @@ const RecoveryWateringView = ({ onBack }: { onBack: () => void }) => {
           </button>
       </div>
 
+      <ImageViewer 
+          isOpen={!!viewImage}
+          imageUrl={viewImage}
+          onClose={() => setViewImage(null)}
+      />
     </div>
   );
 };

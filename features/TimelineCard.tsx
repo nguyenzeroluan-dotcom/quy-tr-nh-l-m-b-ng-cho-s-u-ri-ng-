@@ -12,6 +12,9 @@ const TimelineCard: React.FC<{ item: TimelineItemData, index: number, onClick: (
     ? new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND', maximumSignificantDigits: 3 }).format(item.totalCost)
     : null;
 
+  // Extract just the day number (e.g., "01" from "01/10/25")
+  const dayNumber = item.day.split('/')[0];
+
   return (
     <div className={`relative flex items-start mb-12 md:mb-24 ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} group`}>
       
@@ -19,8 +22,7 @@ const TimelineCard: React.FC<{ item: TimelineItemData, index: number, onClick: (
       <div className="absolute left-6 md:left-1/2 transform -translate-x-1/2 -translate-y-4 md:-translate-y-1/2 z-20">
         <div className="bg-white border-4 border-green-500 text-green-800 font-bold rounded-full w-16 h-16 md:w-20 md:h-20 flex flex-col items-center justify-center shadow-lg transition-transform hover:scale-110 z-20">
           <span className="text-[10px] md:text-xs uppercase text-gray-500 font-bold">Ngày</span>
-          <span className="text-xs md:text-lg leading-none font-extrabold">{item.day.split('/')[0]}</span>
-          <span className="text-[8px] md:text-[10px] text-gray-400">{item.day.split('/').slice(1).join('/')}</span>
+          <span className="text-xl md:text-3xl leading-none font-extrabold pt-1">{dayNumber}</span>
         </div>
       </div>
 
