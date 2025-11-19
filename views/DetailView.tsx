@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { TimelineItemData, RichStep, PRODUCT_USAGE_GUIDE, PRODUCT_DB, ProductInfo } from '../data';
 import { PHGuideModal } from '../features/PHModal';
@@ -56,6 +55,7 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
            "cây khoẻ 50": "ck50",
            "combi": "combi",
            "lactobio": "lactobio",
+           "phân bò vi sinh": "phan_bo_vi_sinh",
            "dm15": "ph_meter_dm15",
            "ph": "litmus_paper" // Default loose match for pH paper
        };
