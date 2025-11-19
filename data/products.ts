@@ -108,21 +108,36 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
     ],
     usage: "Bón lót hoặc bón thúc quanh gốc, liều lượng tùy theo độ tuổi và tình trạng cây."
   },
-
-  // --- BẢO VỆ THỰC VẬT (PROTECTION) ---
+   "kno3": {
+    id: "kno3",
+    category: "nutrition",
+    name: "KNO3 (Potassium Nitrate)",
+    imageUrl: "https://thapxanh.com/images/thumbs/0022451_kali-nitrat-potassium-nitrate-kno3-phan-bon-kali-nito-13-0-46.jpeg",
+    description: "Phân bón KNO3 (Kali Nitrat) với thành phần N >= 13%, K2O >= 46%. Hấp thu nhanh hơn các loại phân kali khác, giúp tăng năng suất và cải thiện chất lượng cho nhiều loại cây trồng.",
+    benefits: [
+        "Cung cấp nguồn Kali và Đạm (dạng Nitrat) hiệu quả cho cây trồng.",
+        "Dinh dưỡng được cây hấp thu nhanh, mang lại hiệu quả tức thì.",
+        "Tăng năng suất, cải thiện chất lượng, màu sắc và hương vị nông sản.",
+        "Hỗ trợ quá trình xử lý ra hoa, giúp cây ra hoa đồng loạt."
+    ],
+    usage: "Dùng để phun lá hoặc tưới gốc trong giai đoạn cây cần nhiều Kali như lúc làm bông, nuôi trái. Liều lượng pha theo hướng dẫn của nhà sản xuất."
+  },
   "ck180": {
       id: "ck180",
-      category: "protection",
+      category: "nutrition",
       name: "FMS - CÂY KHOẺ 180",
-      imageUrl: "https://cf.shopee.vn/file/d3860b86836e41188690946692197851", // Placeholder
-      description: "Tập đoàn vi sinh vật có lợi, chuyên đối kháng với các vi sinh vật gây hại trong đất và trên lá.",
+      imageUrl: "https://lavish-kitty-16b.notion.site/image/attachment%3A9dcee1fb-f1d3-4565-8bfb-ed57f8a461bb%3Az7196617458206_4f6feb214d37870c7a4e88055c3cc300.jpg?table=block&id=2b0a0a49-3a08-80b6-a49a-d2fd3784d8ea&spaceId=228174f8-4a60-4bbf-b8cf-11db580b1ecb&width=2000&userId=&cache=v2",
+      description: "Cung cấp trung vi lượng thiết yếu (đặc biệt là Canxi) giúp cây cứng cáp, tăng đậu trái, hạn chế nứt trái và tăng khả năng chống chịu sâu bệnh.",
       benefits: [
-          "Đối kháng, ức chế sự phát triển của nấm bệnh và vi khuẩn có hại như Phytophthora, Fusarium.",
-          "Tạo ra một lớp màng bảo vệ sinh học xung quanh rễ và trên bề mặt lá.",
-          "An toàn cho cây trồng, con người và môi trường, không gây kháng thuốc."
+          "Cung cấp các trung vi lượng thiết yếu giúp cây cứng cáp, hạn chế đổ ngã, hạn chế nứt trái, móp trái do thiếu canxi.",
+          "Tăng khả năng thụ phấn, hạn chế rụng hoa và trái non.",
+          "Tăng khả năng chống chịu với thời tiết bất lợi và sâu bệnh hại.",
+          "Giúp làm khô vết bệnh, tạo lớp áo bảo vệ bên ngoài hạn chế nấm bệnh xâm nhập gây hại cây trồng."
       ],
-      usage: "Pha 1 lít với 400 lít nước, phun đều hoặc tưới gốc."
+      usage: "Phun lá: Pha 25ml/20L nước hoặc 500ml/400L.\nĐổ gốc: Pha 500ml/400L, đổ 4L/gốc hoặc tưới 1000m² để khử chua, kích rễ.\nLưu ý: Dùng lúc sáng sớm hoặc chiều mát. Đọc kỹ hướng dẫn. Tránh xa tầm tay trẻ em."
   },
+
+  // --- BẢO VỆ THỰC VẬT (PROTECTION) ---
   "ck90": {
       id: "ck90",
       category: "protection",
@@ -141,7 +156,7 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
       id: "ck50",
       category: "protection",
       name: "FMS - CÂY KHOẺ 50 (Bám Dính)",
-      imageUrl: "https://lavish-kitty-16b.notion.site/image/attachment%3A3b851802-4a43-429d-b687-6e491fa3e10f%3Az7196617882703_e6274b601193c7414694b04628359603.jpg?table=block&id=2b0a0a49-3a08-8056-996a-dac63fd2fc13&spaceId=228174f8-4a60-4bbf-b8cf-11db580b1ecb&width=660&userId=&cache=v2",
+      imageUrl: "https://lavish-kitty-16b.notion.site/image/attachment%3A3cac68be-cba1-47fa-bee1-8a2d00af4a6b%3Az7196617181063_9f84a0de6b9836bb17a6551ab7cf63f4.jpg?table=block&id=2b0a0a49-3a08-8042-9114-e0ec2e99618d&spaceId=228174f8-4a60-4bbf-b8cf-11db580b1ecb&width=2000&userId=&cache=v2",
       description: "Chất tăng lực bám dính sinh học.",
       benefits: [
           "Giúp thuốc loang trải đều và bám dính tốt trên bề mặt lá.",
@@ -178,7 +193,8 @@ export const findProductByName = (text: string): ProductInfo | null => {
        "ck50": "ck50", "cây khỏe 50": "ck50", "cây khoẻ 50": "ck50",
        "combi": "combi", "lactobio": "lactobio",
        "phân bò vi sinh": "phan_bo_vi_sinh", "dm15": "ph_meter_dm15",
-       "ph": "litmus_paper"
+       "ph": "litmus_paper",
+       "kno3": "kno3"
    };
 
    // 1. Check mapping first
@@ -198,7 +214,7 @@ export const PRODUCT_USAGE_GUIDE: Record<string, { usage: string, note?: string 
   "Cây khỏe 30": { usage: "Pha 1 lít với 300 lít nước tưới ướt bộ rễ.", note: "Cố định đạm, hòa tan lân, phân giải kali" },
   "Cây khỏe 70": { usage: "Pha 1kg với 400 lít nước tưới đẫm để nâng pH. Pha 1kg với 50 lít nước để diệt rong rêu.", note: "Nâng pH đất và nước (pH = 6 đến 7 là tốt nhất)" }, // Mapped from CK70
   "Cây khỏe 320": { usage: "Pha 1 lít với 400 lít nước tưới đều gốc cây.", note: "Đạm cá" },
-  "Cây khỏe 180": { usage: "Pha 1 lít với 400 lít nước, phun đều trên cây.", note: "Phòng trừ bệnh" }, // Mapped from CK180
+  "Cây khỏe 180": { usage: "Phun lá: 25ml/20L nước. Đổ gốc: 500ml/400L nước.", note: "Bổ sung Canxi & trung vi lượng" }, // Mapped from CK180
   "Cây khỏe 90": { usage: "Pha 1kg với 5 lít nước ngâm qua đêm, sau đó lấy pha với 400 lít nước phun đều trên cây.", note: "Trừ sâu sinh học, quản lý côn trùng" },
   "LactoBio": { usage: "Pha hết gói sản phẩm với thùng nước uống tinh khiết 10 lít, ngâm 1-3 ngày, sau đó pha thêm 400 lít nước phun đều trên cây.", note: "Phòng trừ bệnh" },
   "Vi lượng Combi": { usage: "Pha 1 gói với 200 lít nước, Phun đều trên cây.", note: "Tăng cường vi lượng" },
@@ -207,5 +223,5 @@ export const PRODUCT_USAGE_GUIDE: Record<string, { usage: string, note?: string 
   "NPK 20-20-15": { usage: "URE = 3KG + DAP = 2,8KG + KALI = 2,2KG. Pha 2.000 lít nước tưới chung hệ thống tưới.", note: "Công thức pha 8kg hỗn hợp" },
   "NPK 13-13-21": { usage: "URE = 2,4KG + DAP = 3KG + KALI = 4,6KG. Pha 2.500 lít nước tưới chung hệ thống tưới.", note: "Công thức pha 10kg hỗn hợp" },
   "CK70": { usage: "Pha 1kg với 400 lít nước tưới đẫm để nâng pH. Pha 1kg với 50 lít nước để diệt rong rêu.", note: "Nâng pH đất và nước" },
-  "CK180": { usage: "Pha 1 lít với 400 lít nước, phun đều trên cây (hoặc tưới gốc phòng bệnh).", note: "Phòng bệnh" },
+  "CK180": { usage: "Phun lá: 25ml/20L nước. Đổ gốc: 500ml/400L nước.", note: "Bổ sung Canxi & trung vi lượng" },
 };
