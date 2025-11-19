@@ -89,6 +89,12 @@ const RecoveryWateringView = ({ onBack }: { onBack: () => void }) => {
                  <p className="text-gray-600 mb-4 leading-relaxed">
                     Cadimi (Cd) là một kim loại nặng cực độc, thường tồn tại tạp chất trong các loại phân bón hóa học (đặc biệt là phân Lân kém chất lượng) hoặc do ô nhiễm nguồn nước.
                  </p>
+                 
+                 <div className="mb-4 rounded-lg overflow-hidden border border-gray-200 shadow-sm">
+                    <img src="https://i.ex-cdn.com/nongnghiepmoitruong.vn/files/content/2025/01/16/picture1-094508_787-132852.jpeg" alt="Minh họa Cadimi" className="w-full h-auto object-cover" />
+                    <p className="text-xs text-center text-gray-500 italic p-1 bg-gray-50">Tác động của kim loại nặng lên đất và cây trồng</p>
+                 </div>
+
                  <h4 className="font-bold text-gray-800 mb-2">Tác hại lên cây sầu riêng:</h4>
                  <ul className="list-disc pl-5 text-gray-700 space-y-2">
                     <li>Làm ức chế sự phát triển của rễ non, đầu rễ bị đen và thối.</li>

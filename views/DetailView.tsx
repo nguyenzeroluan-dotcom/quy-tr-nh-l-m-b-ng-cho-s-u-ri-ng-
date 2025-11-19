@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { TimelineItemData, RichStep } from '../data';
+import { TimelineItemData, RichStep, PRODUCT_USAGE_GUIDE } from '../data';
 import { PHGuideModal } from '../features/PHModal';
 import { BaseModal } from '../components/Modal';
 import FarmersmartLogo from '../components/Logo';
@@ -17,6 +17,9 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    // Helper to format currency
+    const formatCurrency = (val: number) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(val);
 
     return (
         <div className="container mx-auto px-4 py-8 max-w-4xl animate-fade-in">
@@ -42,6 +45,7 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
                      <div className="absolute bottom-0 left-0 p-6 md:p-8 text-white">
                          <StageBadge stage={item.stage} label={item.stageLabel} />
                          <h1 className="text-3xl md:text-4xl font-bold mt-2">{item.title}</h1>
+                         <div className="mt-2 text-green-200 font-medium">Thời điểm dự kiến: {item.day}</div>
                      </div>
                 </div>
                 
@@ -51,7 +55,6 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
                         className={`bg-blue-50 p-5 rounded-xl border border-blue-100 relative group/card ${isSoilPHItem ? 'cursor-pointer hover:bg-blue-100 hover:shadow-md transition-all' : ''}`}
                         onClick={() => isSoilPHItem && setShowPHModal(true)}
                      >
-                         {/* Interactive Indicator for Soil Item */}
                          {isSoilPHItem && (
                              <div className="absolute top-3 right-3 text-blue-400 group-hover/card:text-blue-600 transition-colors animate-pulse">
                                  <BookOpenIcon className="w-5 h-5" />
@@ -66,7 +69,6 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
                             {item.action}
                          </p>
                          
-                         {/* Button included for visibility, but whole card is clickable now */}
                          {isSoilPHItem && (
                            <div 
                              className="w-full flex items-center justify-center gap-2 bg-white border border-blue-200 text-blue-600 px-4 py-2 rounded-lg font-bold text-sm transition-colors shadow-sm group-hover/card:bg-blue-600 group-hover/card:text-white group-hover/card:border-blue-600"
@@ -88,14 +90,13 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
             {/* PH Guide Modal */}
             <PHGuideModal isOpen={showPHModal} onClose={() => setShowPHModal(false)} />
 
-            {/* Rich Detail Content (5 Steps for Item 1) */}
-            {item.richDetail ? (
+            {/* Rich Detail Content (if any) */}
+            {item.richDetail && (
                 <div className="mb-10">
                     <h2 className="text-2xl font-bold text-gray-800 mb-4">Quy Trình Chi Tiết</h2>
                     <p className="text-gray-600 mb-6 leading-relaxed border-l-4 border-green-500 pl-4 italic">
                         {item.richDetail.intro}
                     </p>
-                    
                     <div className="space-y-4 relative">
                         {item.richDetail.steps.map((step, idx) => (
                             <div 
@@ -115,44 +116,13 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
                                     </div>
                                     <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">{step.content}</p>
                                 </div>
-
-                                {/* HOVER CARD - Desktop Only */}
-                                <div className="hidden md:block absolute left-[102%] top-1/2 -translate-y-1/2 w-72 bg-white rounded-xl shadow-2xl border border-green-200 p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 pointer-events-none">
-                                    {/* Arrow pointing left */}
-                                    <div className="absolute top-1/2 -left-2 -translate-y-1/2 border-t-8 border-b-8 border-r-8 border-transparent border-r-white drop-shadow-sm"></div>
-                                    
-                                    {/* Image Area */}
-                                    <div className="w-full h-40 bg-gray-100 rounded-lg mb-3 overflow-hidden relative">
-                                        {step.imageUrl ? (
-                                            <img src={step.imageUrl} alt={step.title} className="w-full h-full object-cover" />
-                                        ) : (
-                                            <div className="w-full h-full flex items-center justify-center bg-green-50">
-                                                 {step.icon ? <step.icon className="w-16 h-16 text-green-200" /> : <LeafIcon className="w-16 h-16 text-green-200" />}
-                                            </div>
-                                        )}
-                                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2">
-                                            <span className="text-white text-xs font-bold bg-green-600 px-2 py-0.5 rounded">
-                                                Bước {idx + 1}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    
-                                    <h4 className="font-bold text-gray-800 text-sm mb-1">{step.title}</h4>
-                                    <p className="text-xs text-gray-500 line-clamp-4 leading-relaxed">
-                                        {step.content}
-                                    </p>
-                                </div>
                             </div>
                         ))}
                     </div>
                 </div>
-            ) : (
-                <div className="bg-gray-50 rounded-xl p-8 text-center mb-10 border border-dashed border-gray-300">
-                    <p className="text-gray-500">Thông tin chi tiết cho giai đoạn này đang được cập nhật.</p>
-                </div>
             )}
-
-            {/* Step Modal */}
+            
+             {/* Step Modal */}
             <BaseModal
               isOpen={!!selectedStep}
               onClose={() => setSelectedStep(null)}
@@ -164,7 +134,7 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
                       <div className="w-full flex justify-end">
                         <button 
                             onClick={() => {
-                                if (selectedStep.subPageId) {
+                                if (selectedStep?.subPageId) {
                                     onNavigateToSubPage(selectedStep.subPageId);
                                     setSelectedStep(null);
                                 }
@@ -190,31 +160,93 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
                             {selectedStep.content}
                         </p>
                     </div>
-                    {/* Render additional hoverDetail if different from content */}
-                    {selectedStep.hoverDetail && selectedStep.hoverDetail !== selectedStep.content && (
-                         <div className="bg-green-50 p-4 rounded-lg border border-green-100 text-sm text-gray-600 italic">
-                             {selectedStep.hoverDetail}
-                         </div>
-                    )}
                  </div>
                )}
             </BaseModal>
 
-            {/* Products Section */}
-            <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-green-100">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                    <LeafIcon className="w-6 h-6 mr-2 text-green-600" />
-                    Sản Phẩm Farmersmart Khuyên Dùng
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    {item.products.map((prod, idx) => (
-                        <div key={idx} className="bg-green-50 rounded-lg p-4 border border-green-200 flex items-center space-x-3 hover:bg-green-100 transition-colors">
-                             <FarmersmartLogo variant="icon" className="w-10 h-10 flex-shrink-0" />
-                             <span className="font-semibold text-green-900">{prod}</span>
-                        </div>
-                    ))}
+            {/* Cost & Usage Table */}
+            {item.productDetails && item.productDetails.length > 0 && (
+                <div className="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden mb-8">
+                    <div className="bg-gray-50 px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                         <h2 className="text-xl font-bold text-gray-800 flex items-center">
+                            <LeafIcon className="w-5 h-5 mr-2 text-green-600" />
+                            Chi Tiết Sử Dụng & Chi Phí
+                        </h2>
+                        {item.totalCost && (
+                            <div className="text-sm text-gray-500 italic">
+                                Tổng cộng: <span className="font-bold text-green-700">{formatCurrency(item.totalCost)}</span>
+                            </div>
+                        )}
+                    </div>
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left text-sm">
+                            <thead className="bg-gray-100 text-gray-600 uppercase text-xs font-bold">
+                                <tr>
+                                    <th className="px-6 py-3">Sản Phẩm / Nội Dung</th>
+                                    <th className="px-6 py-3">Công Dụng</th>
+                                    <th className="px-6 py-3">Liều Lượng</th>
+                                    <th className="px-6 py-3 text-right">Chi Phí (VNĐ)</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-gray-200">
+                                {item.productDetails.map((detail, idx) => (
+                                    <tr key={idx} className="hover:bg-gray-50 transition-colors">
+                                        <td className="px-6 py-4 font-medium text-gray-900">{detail.name}</td>
+                                        <td className="px-6 py-4 text-gray-600">{detail.purpose}</td>
+                                        <td className="px-6 py-4 text-gray-600">
+                                            {detail.dosage}
+                                            <span className="text-gray-400 text-xs ml-1">({detail.quantity} {detail.unit})</span>
+                                        </td>
+                                        <td className="px-6 py-4 text-right font-bold text-green-700 group cursor-pointer relative">
+                                            <span className="blur-[5px] group-hover:blur-none transition-all duration-300 select-none">
+                                                {formatCurrency(detail.totalCost)}
+                                            </span>
+                                            <span className="absolute right-6 top-1/2 -translate-y-1/2 text-xs text-gray-400 opacity-100 group-hover:opacity-0 transition-opacity pointer-events-none">
+                                                Hiện giá
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="bg-yellow-50 p-4 text-xs text-yellow-800 italic border-t border-yellow-100">
+                        * Chi phí trên là ước tính tham khảo, có thể thay đổi tùy theo giá thị trường và tình trạng thực tế của vườn. Rê chuột vào cột "Chi Phí" để xem giá.
+                    </div>
                 </div>
-            </div>
+            )}
+
+            {/* Usage Guide (Matched from Page 3) */}
+            {item.productDetails && (
+                <div className="bg-white rounded-2xl shadow-lg border border-green-100 p-6 md:p-8">
+                    <h2 className="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                        <InfoIcon className="w-6 h-6 mr-2 text-green-600" />
+                        Hướng Dẫn Pha Chế (Tham Khảo)
+                    </h2>
+                    <div className="grid grid-cols-1 gap-4">
+                        {item.productDetails.map((detail, idx) => {
+                            // Simple fuzzy match or direct lookup
+                            const key = Object.keys(PRODUCT_USAGE_GUIDE).find(k => detail.name.includes(k));
+                            const guide = key ? PRODUCT_USAGE_GUIDE[key] : null;
+                            
+                            if (!guide) return null;
+
+                            return (
+                                <div key={idx} className="flex flex-col md:flex-row md:items-start gap-3 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                    <div className="md:w-1/4 font-bold text-green-800">{detail.name}</div>
+                                    <div className="md:w-3/4">
+                                        <p className="text-gray-800 font-medium mb-1">{guide.usage}</p>
+                                        {guide.note && <p className="text-sm text-gray-500 italic">({guide.note})</p>}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                     <p className="mt-4 text-xs text-gray-500 text-center">
+                        Lưu ý: Đọc kỹ hướng dẫn trên bao bì sản phẩm trước khi sử dụng.
+                    </p>
+                </div>
+            )}
             
             <div className="mt-8 text-center">
                 <button onClick={onBack} className="text-green-600 font-bold hover:underline">
