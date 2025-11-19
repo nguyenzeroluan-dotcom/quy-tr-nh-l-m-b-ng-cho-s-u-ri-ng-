@@ -165,16 +165,33 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
   }
 };
 
-// --- Helper Module for Product Links ---
-// Use this to get the correct ID structure for navigation
-export const ProductHelper = {
-    getAllProducts: () => Object.values(PRODUCT_DB),
-    getProductById: (id: string) => PRODUCT_DB[id],
-    getProductsByCategory: (cat: string) => Object.values(PRODUCT_DB).filter(p => p.category === cat),
-    // This returns a command object or string that the App can interpret
-    getLinkAction: (id: string) => ({ type: 'navigate_product', payload: id })
-};
+// Helper to find product by name/keyword
+export const findProductByName = (text: string): ProductInfo | null => {
+   const lowerText = text.toLowerCase();
+   // Map specific keywords to IDs for better accuracy
+   const mapping: Record<string, string> = {
+       "ck70": "ck70", "cây khỏe 70": "ck70", "cây khoẻ 70": "ck70",
+       "ck30": "ck30", "cây khỏe 30": "ck30", "cây khoẻ 30": "ck30",
+       "ck320": "ck320", "cây khỏe 320": "ck320", "cây khoẻ 320": "ck320",
+       "ck180": "ck180", "cây khỏe 180": "ck180", "cây khoẻ 180": "ck180",
+       "ck90": "ck90", "cây khỏe 90": "ck90", "cây khoẻ 90": "ck90",
+       "ck50": "ck50", "cây khỏe 50": "ck50", "cây khoẻ 50": "ck50",
+       "combi": "combi", "lactobio": "lactobio",
+       "phân bò vi sinh": "phan_bo_vi_sinh", "dm15": "ph_meter_dm15",
+       "ph": "litmus_paper"
+   };
 
+   // 1. Check mapping first
+   for (const [key, id] of Object.entries(mapping)) {
+       if (lowerText.includes(key)) return PRODUCT_DB[id];
+   }
+
+   // 2. Fallback search in DB
+   return Object.values(PRODUCT_DB).find(p => 
+       lowerText.includes(p.name.toLowerCase()) || 
+       lowerText.includes(p.id.toLowerCase())
+   ) || null;
+};
 
 // --- Product Usage Dictionary (From Page 3) ---
 export const PRODUCT_USAGE_GUIDE: Record<string, { usage: string, note?: string }> = {
