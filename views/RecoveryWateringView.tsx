@@ -75,16 +75,30 @@ const RecoveryWateringView = ({ onBack }: { onBack: () => void }) => {
                     "Bón 10 bao phân ở đất chua chỉ bằng bón 1 bao ở đất tốt."
                     </div>
 
+                    {/* Image 1: Root Development */}
                     <div 
                         className="rounded-xl overflow-hidden shadow-lg border border-gray-200 cursor-zoom-in group mt-6"
                         onClick={() => setViewImage("https://agriplusvn.com/wp-content/uploads/2023/11/muc-do-phat-trien-cua-re-theo-pH.png")}
                     >
                         <img 
                         src="https://agriplusvn.com/wp-content/uploads/2023/11/muc-do-phat-trien-cua-re-theo-pH.png" 
-                        alt="Biểu đồ pH" 
+                        alt="Biểu đồ pH và rễ" 
                         className="w-full h-64 object-contain bg-white transform transition-transform duration-500 group-hover:scale-105"
                         />
-                        <p className="text-center text-sm text-gray-500 bg-gray-50 py-2 font-medium group-hover:text-green-600 transition-colors">Bấm để xem biểu đồ lớn</p>
+                        <p className="text-center text-sm text-gray-500 bg-gray-50 py-2 font-medium group-hover:text-green-600 transition-colors">Bấm để xem biểu đồ phát triển của rễ</p>
+                    </div>
+
+                    {/* Image 2: Nutrient Availability */}
+                    <div 
+                        className="rounded-xl overflow-hidden shadow-lg border border-gray-200 cursor-zoom-in group mt-6"
+                        onClick={() => setViewImage("https://nongnghiepthuanthien.vn/wp-content/uploads/2022/05/pH-dat-anh-huong-den-su-san-co-cua-cac-chat-dinh-duong-trong-dat.jpg")}
+                    >
+                        <img 
+                        src="https://nongnghiepthuanthien.vn/wp-content/uploads/2022/05/pH-dat-anh-huong-den-su-san-co-cua-cac-chat-dinh-duong-trong-dat.jpg" 
+                        alt="Biểu đồ dinh dưỡng theo pH" 
+                        className="w-full h-64 object-contain bg-white transform transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <p className="text-center text-sm text-gray-500 bg-gray-50 py-2 font-medium group-hover:text-green-600 transition-colors">Bấm để xem biểu đồ hấp thu dinh dưỡng</p>
                     </div>
                 </div>
           </div>

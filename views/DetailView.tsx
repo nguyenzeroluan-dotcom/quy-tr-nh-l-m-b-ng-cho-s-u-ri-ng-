@@ -6,7 +6,7 @@ import { BaseModal } from '../components/Modal';
 import { ProductModal } from '../components/ProductModal';
 import FarmersmartLogo from '../components/Logo';
 import { Breadcrumb, StageBadge } from '../components/UI';
-import { SprayIcon, CheckCircleIcon, InfoIcon, LeafIcon, BookOpenIcon, ChevronRightIcon } from '../components/Icons';
+import { SprayIcon, CheckCircleIcon, InfoIcon, LeafIcon, BookOpenIcon, ChevronRightIcon, DropletIcon } from '../components/Icons';
 import ImageViewer from '../components/ImageViewer';
 
 const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemData, onBack: () => void, onNavigateToSubPage: (id: string) => void }) => {
@@ -18,6 +18,9 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
     const [selectedProduct, setSelectedProduct] = useState<ProductInfo | null>(null);
     const [showProductModal, setShowProductModal] = useState(false);
 
+    // Hover Tooltip State
+    const [hoveredProduct, setHoveredProduct] = useState<{ product: ProductInfo, y: number, x: number } | null>(null);
+
     // Check if this is the "Xử Lý Đất & Kích Rễ" item (ID 2)
     const isSoilPHItem = item.id === 2;
 
@@ -28,15 +31,58 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
     // Helper to format currency
     const formatCurrency = (val: number) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(val);
 
-    // Helper to check if product exists in DB
-    const getProductKey = (text: string) => {
-       const lower = text.toLowerCase();
-       if (lower.includes('ck70') || lower.includes('cây khỏe 70')) return 'ck70';
-       return null;
+    // Helper to find product by name/keyword
+    const findProduct = (text: string): ProductInfo | null => {
+       const lowerText = text.toLowerCase();
+       // Map specific keywords to IDs for better accuracy
+       const mapping: Record<string, string> = {
+           "ck70": "ck70",
+           "cây khỏe 70": "ck70",
+           "cây khoẻ 70": "ck70",
+           "ck30": "ck30",
+           "cây khỏe 30": "ck30",
+           "cây khoẻ 30": "ck30",
+           "ck320": "ck320",
+           "cây khỏe 320": "ck320",
+           "cây khoẻ 320": "ck320",
+           "ck180": "ck180",
+           "cây khỏe 180": "ck180",
+           "cây khoẻ 180": "ck180",
+           "ck90": "ck90",
+           "cây khỏe 90": "ck90",
+           "cây khoẻ 90": "ck90",
+           "ck50": "ck50",
+           "cây khỏe 50": "ck50",
+           "cây khoẻ 50": "ck50",
+           "combi": "combi",
+           "lactobio": "lactobio",
+           "dm15": "ph_meter_dm15",
+           "ph": "litmus_paper" // Default loose match for pH paper
+       };
+
+       // 1. Check mapping first
+       for (const [key, id] of Object.entries(mapping)) {
+           if (lowerText.includes(key)) return PRODUCT_DB[id];
+       }
+
+       // 2. Fallback search in DB
+       return Object.values(PRODUCT_DB).find(p => 
+           lowerText.includes(p.name.toLowerCase()) || 
+           lowerText.includes(p.id.toLowerCase())
+       ) || null;
+    };
+
+    const handleMouseEnterProduct = (e: React.MouseEvent, product: ProductInfo) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        setHoveredProduct({
+            product,
+            x: rect.left, // Position to the left of the element
+            y: rect.top + (rect.height / 2)
+        });
     };
 
     return (
-        <div className="container mx-auto px-4 py-8 max-w-[1800px] animate-fade-in">
+        <div className="container mx-auto px-4 py-8 max-w-[1800px] animate-fade-in relative">
             <div className="mb-6">
                  <Breadcrumb 
                     onNavigate={onBack}
@@ -172,8 +218,7 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
                                     </thead>
                                     <tbody className="divide-y divide-gray-100">
                                         {item.productDetails.map((detail, idx) => {
-                                            const productKey = getProductKey(detail.name);
-                                            const productInfo = productKey ? PRODUCT_DB[productKey] : null;
+                                            const productInfo = findProduct(detail.name);
 
                                             return (
                                                 <tr key={idx} className="hover:bg-green-50/50 transition-colors">
@@ -182,6 +227,8 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
                                                             <div 
                                                                 className="inline-flex items-center cursor-pointer text-green-700 hover:text-green-900 hover:underline decoration-dotted group/product"
                                                                 onClick={() => { setSelectedProduct(productInfo); setShowProductModal(true); }}
+                                                                onMouseEnter={(e) => handleMouseEnterProduct(e, productInfo)}
+                                                                onMouseLeave={() => setHoveredProduct(null)}
                                                             >
                                                                 {detail.name}
                                                                 <InfoIcon className="w-4 h-4 ml-2 opacity-50 group-hover/product:opacity-100" />
@@ -259,7 +306,7 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
 
                         {/* Quick Usage Guide */}
                         {item.productDetails && (
-                            <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 max-h-[600px] overflow-y-auto custom-scrollbar">
+                            <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 max-h-[600px] overflow-y-auto custom-scrollbar relative">
                                 <h3 className="text-lg font-bold text-gray-800 mb-5 flex items-center border-b border-gray-100 pb-3 sticky top-0 bg-white z-10">
                                     <InfoIcon className="w-5 h-5 mr-2 text-blue-500" />
                                     Hướng Dẫn Pha Chế Nhanh
@@ -270,9 +317,23 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
                                         const guide = key ? PRODUCT_USAGE_GUIDE[key] : null;
                                         if (!guide) return null;
 
+                                        // Try to find the linked product info
+                                        const productInfo = findProduct(detail.name);
+
                                         return (
-                                            <div key={idx} className="bg-gray-50 rounded-xl p-4 hover:bg-blue-50 transition-colors border border-gray-100">
-                                                <div className="font-bold text-green-800 mb-2 text-sm">{detail.name}</div>
+                                            <div 
+                                                key={idx} 
+                                                className={`rounded-xl p-4 transition-all border ${productInfo 
+                                                    ? 'bg-green-50/50 border-green-100 hover:bg-green-100 hover:border-green-200 cursor-pointer group/item' 
+                                                    : 'bg-gray-50 border-gray-100 hover:bg-gray-100'}`}
+                                                onClick={() => { if(productInfo) { setSelectedProduct(productInfo); setShowProductModal(true); } }}
+                                                onMouseEnter={(e) => { if(productInfo) handleMouseEnterProduct(e, productInfo); }}
+                                                onMouseLeave={() => setHoveredProduct(null)}
+                                            >
+                                                <div className={`font-bold text-sm mb-2 flex items-center justify-between ${productInfo ? 'text-green-800 group-hover/item:underline' : 'text-gray-800'}`}>
+                                                    {detail.name}
+                                                    {productInfo && <InfoIcon className="w-4 h-4 text-green-500 opacity-0 group-hover/item:opacity-100 transition-opacity" />}
+                                                </div>
                                                 <p className="text-gray-700 text-sm mb-2 leading-snug">{guide.usage}</p>
                                                 {guide.note && <div className="text-xs text-gray-500 italic bg-white p-2 rounded border border-gray-100 inline-block">{guide.note}</div>}
                                             </div>
@@ -291,6 +352,35 @@ const DetailView = ({ item, onBack, onNavigateToSubPage }: { item: TimelineItemD
                     </div>
                 </div>
             </div>
+
+            {/* Floating Hover Tooltip */}
+            {hoveredProduct && (
+                <div 
+                    className="fixed z-50 bg-white rounded-xl shadow-2xl border border-green-100 w-72 p-4 animate-scale-in pointer-events-none"
+                    style={{ 
+                        top: hoveredProduct.y, 
+                        left: hoveredProduct.x - 300, // Offset to left
+                        transform: 'translateY(-50%)'
+                    }}
+                >
+                    <div className="w-full h-32 bg-gray-50 rounded-lg mb-3 overflow-hidden flex items-center justify-center">
+                        <img src={hoveredProduct.product.imageUrl} alt={hoveredProduct.product.name} className="w-full h-full object-contain" />
+                    </div>
+                    <div className="text-xs font-bold text-green-600 uppercase tracking-wider mb-1">
+                        {hoveredProduct.product.category === 'tool' ? 'Dụng Cụ' : 
+                         hoveredProduct.product.category === 'nutrition' ? 'Dinh Dưỡng' : 'Sản Phẩm'}
+                    </div>
+                    <h4 className="font-bold text-gray-800 text-sm mb-2 line-clamp-2 leading-tight">{hoveredProduct.product.name}</h4>
+                    <p className="text-xs text-gray-500 line-clamp-3">{hoveredProduct.product.description}</p>
+                    <div className="mt-2 pt-2 border-t border-gray-100 text-xs text-green-600 font-bold flex items-center">
+                        <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                        Bấm để xem chi tiết
+                    </div>
+                    
+                    {/* Arrow pointing right */}
+                    <div className="absolute top-1/2 -right-2 w-4 h-4 bg-white transform -translate-y-1/2 rotate-45 border-t border-r border-green-100"></div>
+                </div>
+            )}
 
             {/* PH Guide Modal */}
             <PHGuideModal isOpen={showPHModal} onClose={() => setShowPHModal(false)} />
