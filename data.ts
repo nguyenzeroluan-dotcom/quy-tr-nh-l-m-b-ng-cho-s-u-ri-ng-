@@ -101,7 +101,7 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
     id: "ck70",
     category: "nutrition",
     name: "FMS - CÂY KHOẺ 70 (Tinh Vôi)",
-    imageUrl: "https://lavish-kitty-16b.notion.site/image/attachment%3A4e4be20e-c1c3-46e2-a646-2a5d9d001ed8%3Ack70.jpg?table=block&id=2b0a0a49-3a08-8007-b34c-d76d683e759b&spaceId=228174f8-4a60-4bbf-b8cf-11db580b1ecb&width=1420&userId=&cache=v2", 
+    imageUrl: "https://lavish-kitty-16b.notion.site/image/attachment%3Aafd8f603-a327-4ede-b4e9-908f3494f0d7%3Ack70_new.jpg?table=block&id=2b0a0a49-3a08-8031-8552-f080457aeb75&spaceId=228174f8-4a60-4bbf-b8cf-11db580b1ecb&width=2000&userId=&cache=v2", 
     description: "VÔI TINH - BÍ QUYẾT HẠ PHÈN, MẶN. > 90% canxi, phụ gia đặc biệt.",
     benefits: [
       "Hạ phèn, mặn nhanh chóng sau 30 phút.",
@@ -142,7 +142,7 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
       id: "combi",
       category: "nutrition",
       name: "Vi Lượng Combi (Gói 25g)",
-      imageUrl: "https://nongnghiepthuanthien.vn/wp-content/uploads/2021/05/trung-vi-luong-combi-chelate-nong-nghiep-thuan-thien-5.jpg", // Placeholder
+      imageUrl: "https://product.hstatic.net/200000772895/product/z4857480616072_34e078999c81a8f8756629e393128718_e389b90136ed48d38547359d4980f245_master.jpg", 
       description: "Tổ hợp vi lượng dạng Chelate giúp cây hấp thụ hoàn toàn.",
       benefits: [
           "Khắc phục hiện tượng vàng lá do thiếu vi lượng.",
@@ -169,13 +169,14 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
   "ck90": {
       id: "ck90",
       category: "protection",
-      name: "FMS - CÂY KHOẺ 90 (Thảo Mộc)",
+      name: "FMS - CÂY KHOẺ 90 (Trừ Sâu Sinh Học)",
       imageUrl: "https://lavish-kitty-16b.notion.site/image/attachment%3A4383321c-1bd0-42e0-b9d7-4a1b376f0c8e%3Az7196617249151_64b7794682ad385ce0223732703e0490.jpg?table=block&id=2b0a0a49-3a08-8058-b736-fecdb3914d84&spaceId=228174f8-4a60-4bbf-b8cf-11db580b1ecb&width=2000&userId=&cache=v2",
-      description: "Chế phẩm xua đuổi và phòng trừ côn trùng từ tinh dầu thảo mộc.",
+      description: "Thuốc trừ sâu sinh học, tổ hợp các chủng nấm ký sinh (nấm trắng, xanh, tím,...) và vi khuẩn BT để quản lý hơn 110 loại côn trùng gây hại.",
       benefits: [
-          "Xua đuổi rầy xanh, bọ trĩ, nhện đỏ.",
-          "Không gây nóng bông, nóng trái.",
-          "An toàn cho thiên địch và người sử dụng."
+          "Quản lý hiệu quả hơn 110 loại côn trùng gây hại.",
+          "Phổ tác động rộng nhờ tổ hợp nấm trắng, nấm xanh, nấm tím, nấm tua, nấm bột.",
+          "Bổ sung vi khuẩn BT (Bacillus thuringiensis) tăng cường hiệu quả.",
+          "An toàn, không gây nóng bông, nóng trái."
       ],
       usage: "Pha 1kg với 5 lít nước ngâm qua đêm, sau đó pha loãng với 400 lít nước phun."
   },
@@ -224,7 +225,7 @@ export const PRODUCT_USAGE_GUIDE: Record<string, { usage: string, note?: string 
   "Cây khỏe 70": { usage: "Pha 1kg với 1000 lít nước tưới đẫm.", note: "Nâng pH đất và nước (pH = 6 đến 7 là tốt nhất)" }, // Mapped from CK70
   "Cây khỏe 320": { usage: "Pha 1 lít với 400 lít nước tưới đều gốc cây.", note: "Đạm cá" },
   "Cây khỏe 180": { usage: "Pha 1 lít với 400 lít nước, phun đều trên cây.", note: "Phòng trừ bệnh" }, // Mapped from CK180
-  "Cây khỏe 90": { usage: "Pha 1kg với 5 lít nước ngâm qua đêm, sau đó lấy pha với 400 lít nước phun đều trên cây.", note: "Phòng trừ côn trùng" },
+  "Cây khỏe 90": { usage: "Pha 1kg với 5 lít nước ngâm qua đêm, sau đó lấy pha với 400 lít nước phun đều trên cây.", note: "Trừ sâu sinh học, quản lý côn trùng" },
   "LactoBio": { usage: "Pha hết gói sản phẩm với thùng nước uống tinh khiết 10 lít, ngâm 1-3 ngày, sau đó pha thêm 400 lít nước phun đều trên cây.", note: "Phòng trừ bệnh" },
   "Vi lượng Combi": { usage: "Pha 1 gói với 200 lít nước, Phun đều trên cây.", note: "Tăng cường vi lượng" },
   "Cây khỏe 50": { usage: "Chai 500ml pha 800 lít nước", note: "Tăng bám dính" },
@@ -291,7 +292,7 @@ export const timelineData: TimelineItemData[] = [
       { name: "Tưới CK70", purpose: "Mục tiêu nâng pH = 6 đến 7", dosage: "Cho 100 gốc pH thấp", unit: "kg", quantity: 6, totalCost: 420000 },
       { name: "Trichoderma (tưới gốc)", purpose: "Phân hủy xác hữu cơ", dosage: "Tưới gốc", unit: "kg", quantity: 5, totalCost: 400000 },
       { name: "Cây khỏe 220 (tưới gốc)", purpose: "Ngừa tuyến trùng", dosage: "Tưới gốc", unit: "lít", quantity: 2, totalCost: 452000 },
-      { name: "Cây khỏe 90 (tưới gốc)", purpose: "Ngừa côn trùng gây hại", dosage: "Tưới gốc", unit: "kg", quantity: 2, totalCost: 466000 },
+      { name: "Cây khỏe 90 (tưới gốc)", purpose: "Quản lý côn trùng gây hại trong đất", dosage: "Tưới gốc", unit: "kg", quantity: 2, totalCost: 466000 },
       { name: "CK180 (tưới gốc)", purpose: "Phòng bệnh", dosage: "Tưới gốc", unit: "lít", quantity: 2, totalCost: 378000 },
       { name: "Cây khỏe 320 (tưới gốc)", purpose: "Đạm cá", dosage: "Tưới gốc", unit: "lít", quantity: 2, totalCost: 338000 },
       { name: "Phân bò vi sinh Quốc Tế", purpose: "Giúp đất tơi xốp, thêm dinh dưỡng", dosage: "Bón gốc", unit: "kg", quantity: 1265, totalCost: 7590000 },
@@ -324,13 +325,13 @@ export const timelineData: TimelineItemData[] = [
     products: ["NPK 30-10-10", "Cây khỏe 90", "Cây khỏe 180", "Cây khỏe 50"],
     productDetails: [
       { name: "NPK 30-10-10", purpose: "Dinh dưỡng phục hồi", dosage: "Dinh dưỡng", unit: "kg", quantity: 506, totalCost: 8602000 },
-      { name: "Cây khỏe 90 (Phun lần 1)", purpose: "Ngừa côn trùng gây hại", dosage: "Ngày 31/10/2025", unit: "kg", quantity: 2, totalCost: 466000 },
+      { name: "Cây khỏe 90 (Phun lần 1)", purpose: "Quản lý côn trùng gây hại (phun lá)", dosage: "Ngày 31/10/2025", unit: "kg", quantity: 2, totalCost: 466000 },
       { name: "Cây khỏe 180 (Phun lần 1)", purpose: "Phòng bệnh", dosage: "Ngày 31/10/2025", unit: "lít", quantity: 2, totalCost: 378000 },
       { name: "Cây khỏe 50 (Phun lần 1)", purpose: "Bám dính", dosage: "Ngày 31/10/2025", unit: "ml", quantity: 500, totalCost: 56000 },
-      { name: "Cây khỏe 90 (Phun lần 2)", purpose: "Ngừa côn trùng gây hại", dosage: "Ngày 07/11/2025", unit: "kg", quantity: 2, totalCost: 466000 },
+      { name: "Cây khỏe 90 (Phun lần 2)", purpose: "Quản lý côn trùng gây hại (phun lá)", dosage: "Ngày 07/11/2025", unit: "kg", quantity: 2, totalCost: 466000 },
       { name: "Cây khỏe 180 (Phun lần 2)", purpose: "Phòng bệnh", dosage: "Ngày 07/11/2025", unit: "lít", quantity: 2, totalCost: 378000 },
       { name: "Cây khỏe 50 (Phun lần 2)", purpose: "Bám dính", dosage: "Ngày 07/11/2025", unit: "ml", quantity: 500, totalCost: 56000 },
-      { name: "Cây khỏe 90 (Phun lần 3)", purpose: "Ngừa côn trùng gây hại", dosage: "Ngày 14/11/2025", unit: "kg", quantity: 2, totalCost: 466000 },
+      { name: "Cây khỏe 90 (Phun lần 3)", purpose: "Quản lý côn trùng gây hại (phun lá)", dosage: "Ngày 14/11/2025", unit: "kg", quantity: 2, totalCost: 466000 },
       { name: "Cây khỏe 180 (Phun lần 3)", purpose: "Phòng bệnh", dosage: "Ngày 14/11/2025", unit: "lít", quantity: 2, totalCost: 378000 },
       { name: "Cây khỏe 50 (Phun lần 3)", purpose: "Bám dính", dosage: "Ngày 14/11/2025", unit: "ml", quantity: 500, totalCost: 56000 },
     ],
