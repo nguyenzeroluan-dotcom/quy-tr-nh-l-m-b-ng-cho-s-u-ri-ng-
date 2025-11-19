@@ -128,7 +128,7 @@ const CarouselHeader = () => {
   };
 
   return (
-    <header className="relative h-[500px] md:h-[600px] bg-gray-900 overflow-hidden group">
+    <header className="relative h-[500px] md:h-[700px] bg-gray-900 overflow-hidden group">
       {/* Carousel Backgrounds */}
       {mediaList.map((item, index) => (
         <div 
@@ -154,36 +154,36 @@ const CarouselHeader = () => {
         </div>
       ))}
 
-      {/* Content Overlay */}
+      {/* Content Overlay - Wide Container */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center p-4">
           <div className="mb-8 transform hover:scale-105 transition-transform duration-500">
             <div className="p-6 bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl border border-white/50">
                <FarmersmartLogo className="h-20 w-auto text-green-800" />
             </div>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg tracking-tight">
+          <h1 className="text-4xl md:text-7xl font-bold mb-6 text-white drop-shadow-lg tracking-tight">
             Quy Trình Tổng Quát
           </h1>
-          <p className="text-green-100 text-lg md:text-2xl max-w-3xl mx-auto mb-10 drop-shadow-md font-light">
+          <p className="text-green-100 text-lg md:text-3xl max-w-5xl mx-auto mb-12 drop-shadow-md font-light">
             Giải pháp chăm sóc chuyên biệt ứng dụng bộ chế phẩm sinh học <span className="font-bold text-white">Farmersmart</span>
           </p>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-xl">
-            <div className="text-center px-4 border-r border-white/10 last:border-0">
-                <p className="text-green-300 text-xs uppercase tracking-widest mb-1">Loại Vườn</p>
-                <p className="font-bold text-base md:text-xl text-white">Kinh Doanh</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-7xl mx-auto bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 shadow-xl w-full md:w-auto">
+            <div className="text-center px-6 border-r border-white/10 last:border-0">
+                <p className="text-green-300 text-xs uppercase tracking-widest mb-2">Loại Vườn</p>
+                <p className="font-bold text-xl md:text-2xl text-white">Kinh Doanh</p>
             </div>
-             <div className="text-center px-4 border-r border-white/10 last:border-0">
-                <p className="text-green-300 text-xs uppercase tracking-widest mb-1">Độ Tuổi</p>
-                <p className="font-bold text-base md:text-xl text-white">Trên 9 Năm</p>
+             <div className="text-center px-6 border-r border-white/10 last:border-0">
+                <p className="text-green-300 text-xs uppercase tracking-widest mb-2">Độ Tuổi</p>
+                <p className="font-bold text-xl md:text-2xl text-white">Trên 9 Năm</p>
             </div>
-            <div className="text-center px-4 border-r border-white/10 last:border-0">
-                <p className="text-green-300 text-xs uppercase tracking-widest mb-1">Giải Pháp</p>
-                <p className="font-bold text-base md:text-xl text-white">Hữu Cơ Vi Sinh</p>
+            <div className="text-center px-6 border-r border-white/10 last:border-0">
+                <p className="text-green-300 text-xs uppercase tracking-widest mb-2">Giải Pháp</p>
+                <p className="font-bold text-xl md:text-2xl text-white">Hữu Cơ Vi Sinh</p>
             </div>
-            <div className="text-center px-4">
-                <p className="text-green-300 text-xs uppercase tracking-widest mb-1">Mục Tiêu</p>
-                <p className="font-bold text-base md:text-xl text-white">Bền Vững</p>
+            <div className="text-center px-6">
+                <p className="text-green-300 text-xs uppercase tracking-widest mb-2">Mục Tiêu</p>
+                <p className="font-bold text-xl md:text-2xl text-white">Bền Vững</p>
             </div>
           </div>
       </div>

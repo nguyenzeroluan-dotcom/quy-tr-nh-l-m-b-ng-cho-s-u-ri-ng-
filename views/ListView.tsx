@@ -91,12 +91,12 @@ const ListView: React.FC<ListViewProps> = ({ onItemClick, onNavigateToBlog, onNa
         </div>
       </div>
 
-      {/* Main Timeline Content */}
-      <main className="container mx-auto px-4 py-12 relative min-h-[800px]">
+      {/* Main Timeline Content - Full Width PC Upgrade */}
+      <main className="container mx-auto px-4 py-12 relative min-h-[800px] max-w-[1920px]">
         {/* Vertical Line */}
         <div className="timeline-line"></div>
 
-        <div className="relative z-10">
+        <div className="relative z-10 max-w-[1400px] mx-auto">
           {filteredData.map((item, index) => (
             <TimelineCard 
                 key={item.id} 
@@ -115,42 +115,42 @@ const ListView: React.FC<ListViewProps> = ({ onItemClick, onNavigateToBlog, onNa
       </main>
 
       {/* Footer */}
-      <footer className="bg-green-900 text-green-300 py-12">
-         <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-3 gap-8 mb-8 text-center md:text-left">
+      <footer className="bg-green-900 text-green-300 py-16">
+         <div className="container mx-auto px-4 max-w-[1600px]">
+            <div className="grid md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
                 <div className="flex flex-col items-center md:items-start">
-                     <FarmersmartLogo className="h-12 w-auto text-white mb-4" light={true} />
-                     <p className="text-sm text-green-200">Đồng hành cùng nhà nông kiến tạo nền nông nghiệp bền vững.</p>
+                     <FarmersmartLogo className="h-16 w-auto text-white mb-6" light={true} />
+                     <p className="text-base text-green-200 leading-relaxed">Đồng hành cùng nhà nông kiến tạo nền nông nghiệp bền vững.</p>
                 </div>
                 
                 <div className="flex flex-col items-center md:items-start">
-                     <h3 className="text-white font-bold text-lg mb-4">Liên Hệ</h3>
-                     <p className="mb-2">Địa chỉ: Ấp Tân Long, Xã Tân Dương, Tỉnh Đồng Tháp</p>
-                     <p className="mb-2">Hotline: <span className="text-white font-bold">0908.119.987</span></p>
+                     <h3 className="text-white font-bold text-xl mb-6">Liên Hệ</h3>
+                     <p className="mb-3 text-lg">Địa chỉ: Ấp Tân Long, Xã Tân Dương, Tỉnh Đồng Tháp</p>
+                     <p className="mb-3 text-lg">Hotline: <span className="text-white font-bold">0908.119.987</span></p>
                 </div>
 
                 <div className="flex flex-col items-center md:items-start">
-                    <h3 className="text-white font-bold text-lg mb-4">Thông Tin Hữu Ích</h3>
+                    <h3 className="text-white font-bold text-xl mb-6">Thông Tin Hữu Ích</h3>
                     <button 
                         onClick={onNavigateToBlog}
-                        className="flex items-center gap-2 text-green-200 hover:text-white hover:underline transition-colors mb-2"
+                        className="flex items-center gap-2 text-green-200 hover:text-white hover:underline transition-colors mb-3 text-lg"
                     >
-                        <BookOpenIcon className="w-4 h-4" /> Blog & Kỹ Thuật Canh Tác
+                        <BookOpenIcon className="w-5 h-5" /> Blog & Kỹ Thuật Canh Tác
                     </button>
                      <button 
                         onClick={onNavigateToProducts}
-                        className="flex items-center gap-2 text-green-200 hover:text-white hover:underline transition-colors mb-2"
+                        className="flex items-center gap-2 text-green-200 hover:text-white hover:underline transition-colors mb-3 text-lg"
                     >
-                        <LeafIcon className="w-4 h-4" /> Sản Phẩm & Dụng Cụ
+                        <LeafIcon className="w-5 h-5" /> Sản Phẩm & Dụng Cụ
                     </button>
-                    <a href="#" className="text-green-200 hover:text-white hover:underline transition-colors mb-2">Chính sách bảo mật</a>
-                    <a href="#" className="text-green-200 hover:text-white hover:underline transition-colors">Điều khoản sử dụng</a>
+                    <a href="#" className="text-green-200 hover:text-white hover:underline transition-colors mb-3 text-lg">Chính sách bảo mật</a>
+                    <a href="#" className="text-green-200 hover:text-white hover:underline transition-colors text-lg">Điều khoản sử dụng</a>
                 </div>
             </div>
 
-            <div className="border-t border-green-800 pt-6 text-center text-sm text-green-400">
+            <div className="border-t border-green-800 pt-8 text-center text-green-400">
                <p>© 2025 Công Ty Cổ Phần Farmersmart. All rights reserved.</p>
-               <p className="mt-2 text-xs italic opacity-70">Lưu ý: Quy trình và liều lượng có thể thay đổi tùy theo diễn biến thực tế của thời tiết và sức khỏe cây trồng.</p>
+               <p className="mt-2 text-sm italic opacity-70">Lưu ý: Quy trình và liều lượng có thể thay đổi tùy theo diễn biến thực tế của thời tiết và sức khỏe cây trồng.</p>
             </div>
          </div>
       </footer>
