@@ -28,6 +28,17 @@ export const BaseModal: React.FC<BaseModalProps> = ({
   const resizeStartRef = useRef({ x: 0, y: 0, width: 0, height: 0 });
   const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
 
+  // Handle ESC key to close
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isOpen && e.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   // Drag Logic
   const handleMouseDownDrag = (e: React.MouseEvent) => {
     if (isMobile) return;
@@ -121,14 +132,15 @@ export const BaseModal: React.FC<BaseModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose}></div>
+       {/* Backdrop - Click to close */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm cursor-pointer" onClick={onClose}></div>
       
       {/* Modal Window */}
       <div 
         ref={modalRef}
         style={modalStyle}
         className="flex flex-col bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-white/50 overflow-hidden transition-shadow duration-200 animate-scale-in"
+        onClick={(e) => e.stopPropagation()} // Prevent click from closing when clicking inside modal
       >
         {/* Header (Draggable) */}
         <div 

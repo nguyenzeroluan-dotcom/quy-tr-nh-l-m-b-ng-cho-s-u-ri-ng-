@@ -52,7 +52,7 @@ export const timelineData: TimelineItemData[] = [
       steps: [
         {
           title: "Bước 1: Vệ sinh tàn dư thực vật",
-          content: "Sau khi thu hoạch, tiến hành cắt bỏ các cành khô, cành sâu bệnh, cuống trái còn sót lại. Thu gom toàn bộ tàn dư ra khỏi vườn và tiêu hủy để loại bỏ nơi trú ngụ của nấm bệnh và sâu hại.",
+          content: "Sau khi thu hoạch, tiến hành cắt bỏ các cành khô, cành sâu bệnh, cuống trái còn sót lại. Thu gom toàn bộ tàn dư ra khỏi vườn và tiêu hủy để loại bỏ nơi trú ngụ của nấm bệnh và sâu hại.\n\nTạo thông thoáng, hạn chế cạnh tranh dinh dưỡng, hạn chế mầm bệnh và côn trùng gây hại.",
           icon: ScissorsIcon,
           imageUrl: "https://lh7-rt.googleusercontent.com/docsz/AD_4nXcg4sSs3hVnLhBvBtDIlPddaxEbRWJpXeukguH6x-gDpxTmXbuppI-q-cxfOWB51lhAffDOA699AzwaGJSSHenOPzn0_fUmsfggYjcAHbF-SSSU-8Erih4X8o5lwv0hR8Q7An21cw?key=HW9Is8Th0VJ0Ln4U3kUKOP64"
         },
@@ -65,7 +65,8 @@ export const timelineData: TimelineItemData[] = [
         {
             title: "Bước 3: Rửa vườn",
             content: "Phun thuốc tẩy rửa vườn để diệt rong rêu, nấm khuẩn bám trên thân, cành, lá.",
-            icon: SprayIcon
+            icon: SprayIcon,
+            imageUrl: "https://cdn.vnfarm.com.vn/san-pham/nano-cu-3.jpg"
         }
       ]
     }

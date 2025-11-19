@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import CarouselHeader from '../features/Header';
 import TimelineCard from '../features/TimelineCard';
 import { timelineData, TimelineItemData } from '../data';
@@ -12,6 +12,35 @@ interface ListViewProps {
 
 const ListView: React.FC<ListViewProps> = ({ onItemClick }) => {
   const [filter, setFilter] = useState('all');
+  
+  // Smart Header State
+  const [showHeader, setShowHeader] = useState(true);
+  const [isAtTop, setIsAtTop] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY < 50) {
+        // At top
+        setIsAtTop(true);
+        setShowHeader(true);
+      } else {
+        setIsAtTop(false);
+        // Show if scrolling up, hide if scrolling down
+        if (currentScrollY < lastScrollY.current) {
+          setShowHeader(true);
+        } else if (currentScrollY > lastScrollY.current) {
+          setShowHeader(false);
+        }
+      }
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const filteredData = filter === 'all' 
     ? timelineData 
@@ -21,8 +50,14 @@ const ListView: React.FC<ListViewProps> = ({ onItemClick }) => {
     <div className="min-h-screen pb-20 bg-gradient-to-b from-green-50 to-white">
       <CarouselHeader />
 
-      {/* Sticky Navigation Filter */}
-      <div className="sticky top-0 z-30 bg-white/90 backdrop-blur-md shadow-sm border-b border-green-100 py-4">
+      {/* Sticky Smart Navigation Filter */}
+      <div 
+        className={`sticky top-0 z-30 transition-all duration-300 transform border-b border-green-100 py-4 ${
+          showHeader ? 'translate-y-0' : '-translate-y-full'
+        } ${
+          isAtTop ? 'bg-white/95 shadow-sm' : 'bg-white/80 backdrop-blur-md shadow-md'
+        }`}
+      >
         <div className="container mx-auto px-4 overflow-x-auto no-scrollbar">
           <div className="flex md:justify-center space-x-2 min-w-max px-2">
             <FilterButton 
