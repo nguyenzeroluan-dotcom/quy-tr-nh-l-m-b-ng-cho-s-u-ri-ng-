@@ -1,19 +1,24 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { TimelineItemData } from './data';
+import { LegalPageContent, PRIVACY_POLICY_CONTENT, TERMS_OF_USE_CONTENT } from './legal-data';
 import ListView from './views/ListView';
 import DetailView from './views/DetailView';
 import RecoveryWateringView from './views/RecoveryWateringView';
 import BlogView from './views/BlogView';
 import ProductsView from './views/ProductsView';
+import LegalView from './views/LegalView';
 import FarmersmartLogo from './components/Logo';
 import { BackToTopButton } from './components/UI';
 
+type ViewState = 'list' | 'detail' | 'subpage' | 'blog' | 'products' | 'legal';
+
 const App = () => {
-  const [view, setView] = useState<'list' | 'detail' | 'subpage' | 'blog' | 'products'>('list');
+  const [view, setView] = useState<ViewState>('list');
   const [selectedItem, setSelectedItem] = useState<TimelineItemData | null>(null);
   const [currentSubPageId, setCurrentSubPageId] = useState<string | null>(null);
   const [selectedProductId, setSelectedProductId] = useState<string | undefined>(undefined);
+  const [legalPageContent, setLegalPageContent] = useState<LegalPageContent | null>(null);
 
   // Smart Header State
   const [showHeader, setShowHeader] = useState(true);
@@ -54,6 +59,7 @@ const App = () => {
       setSelectedItem(null);
       setCurrentSubPageId(null);
       setSelectedProductId(undefined);
+      setLegalPageContent(null);
       window.scrollTo(0, 0);
   };
 
@@ -82,24 +88,48 @@ const App = () => {
       window.scrollTo(0, 0);
   }
 
+  const handleNavigateToLegal = (page: 'privacy' | 'terms') => {
+      if (page === 'privacy') {
+        setLegalPageContent(PRIVACY_POLICY_CONTENT);
+      } else {
+        setLegalPageContent(TERMS_OF_USE_CONTENT);
+      }
+      setView('legal');
+      window.scrollTo(0, 0);
+  }
+
+  const renderHeader = (lightLogo = false) => (
+    <header 
+        className={`fixed top-0 w-full z-30 transition-all duration-300 ${
+            showHeader ? 'translate-y-0' : '-translate-y-full'
+        } ${
+            isAtTop 
+            ? 'bg-white border-b border-gray-200 shadow-sm py-4' 
+            : 'bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-md py-3'
+        }`}
+    >
+        <div className="container mx-auto px-4 flex justify-between items-center">
+            <div className="flex items-center gap-2 cursor-pointer" onClick={handleBackToHome}>
+                <FarmersmartLogo className="h-8 w-auto" light={lightLogo} />
+            </div>
+        </div>
+    </header>
+  );
+
+  if (view === 'legal' && legalPageContent) {
+    return (
+        <div className="min-h-screen">
+            {renderHeader()}
+            <LegalView onBack={handleBackToHome} content={legalPageContent} />
+            <BackToTopButton />
+        </div>
+    );
+  }
+
   if (view === 'products') {
      return (
         <div className="min-h-screen">
-             <header 
-                className={`fixed top-0 w-full z-30 transition-all duration-300 ${
-                    showHeader ? 'translate-y-0' : '-translate-y-full'
-                } ${
-                    isAtTop 
-                    ? 'bg-white border-b border-gray-200 shadow-sm py-4' 
-                    : 'bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-md py-3'
-                }`}
-            >
-                <div className="container mx-auto px-4 flex justify-between items-center">
-                    <div className="flex items-center gap-2 cursor-pointer" onClick={handleBackToHome}>
-                        <FarmersmartLogo className="h-8 w-auto" />
-                    </div>
-                </div>
-             </header>
+             {renderHeader()}
              <ProductsView onBack={handleBackToHome} preselectedProductId={selectedProductId} />
              <BackToTopButton />
         </div>
@@ -109,21 +139,7 @@ const App = () => {
   if (view === 'blog') {
       return (
         <div className="min-h-screen">
-            <header 
-                className={`fixed top-0 w-full z-30 transition-all duration-300 ${
-                    showHeader ? 'translate-y-0' : '-translate-y-full'
-                } ${
-                    isAtTop 
-                    ? 'bg-white border-b border-gray-200 shadow-sm py-4' 
-                    : 'bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-md py-3'
-                }`}
-            >
-                <div className="container mx-auto px-4 flex justify-between items-center">
-                    <div className="flex items-center gap-2 cursor-pointer" onClick={handleBackToHome}>
-                        <FarmersmartLogo className="h-8 w-auto" />
-                    </div>
-                </div>
-             </header>
+             {renderHeader()}
              <BlogView onBack={handleBackToHome} />
              <BackToTopButton />
         </div>
@@ -133,22 +149,7 @@ const App = () => {
   if (view === 'subpage' && currentSubPageId === 'recovery-watering') {
      return (
         <div className="min-h-screen pb-20 bg-gradient-to-b from-blue-50 to-white">
-            <header 
-                className={`fixed top-0 w-full z-30 transition-all duration-300 ${
-                    showHeader ? 'translate-y-0' : '-translate-y-full'
-                } ${
-                    isAtTop 
-                    ? 'bg-white border-b border-gray-200 shadow-sm py-4' 
-                    : 'bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-md py-3'
-                }`}
-            >
-                <div className="container mx-auto px-4 flex justify-between items-center">
-                    <div className="flex items-center gap-2 cursor-pointer" onClick={handleBackToHome}>
-                        <FarmersmartLogo className="h-8 w-auto" />
-                    </div>
-                </div>
-             </header>
-             
+             {renderHeader()}
              {/* Add padding top to compensate for fixed header */}
              <div className="pt-20">
                 <RecoveryWateringView onBack={handleBackToDetail} />
@@ -195,6 +196,7 @@ const App = () => {
             onItemClick={handleItemClick} 
             onNavigateToBlog={handleNavigateToBlog}
             onNavigateToProducts={() => handleNavigateToProducts()}
+            onNavigateToLegal={handleNavigateToLegal}
          />;
 };
 

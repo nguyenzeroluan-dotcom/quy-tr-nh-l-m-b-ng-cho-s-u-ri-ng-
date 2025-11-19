@@ -11,9 +11,10 @@ interface ListViewProps {
   onItemClick: (item: TimelineItemData) => void;
   onNavigateToBlog: () => void;
   onNavigateToProducts: () => void;
+  onNavigateToLegal: (page: 'privacy' | 'terms') => void;
 }
 
-const ListView: React.FC<ListViewProps> = ({ onItemClick, onNavigateToBlog, onNavigateToProducts }) => {
+const ListView: React.FC<ListViewProps> = ({ onItemClick, onNavigateToBlog, onNavigateToProducts, onNavigateToLegal }) => {
   const [filter, setFilter] = useState('all');
   
   // Smart Header State
@@ -143,8 +144,8 @@ const ListView: React.FC<ListViewProps> = ({ onItemClick, onNavigateToBlog, onNa
                     >
                         <LeafIcon className="w-5 h-5" /> Sản Phẩm & Dụng Cụ
                     </button>
-                    <a href="#" className="text-green-200 hover:text-white hover:underline transition-colors mb-3 text-lg">Chính sách bảo mật</a>
-                    <a href="#" className="text-green-200 hover:text-white hover:underline transition-colors text-lg">Điều khoản sử dụng</a>
+                    <button onClick={() => onNavigateToLegal('privacy')} className="text-green-200 hover:text-white hover:underline transition-colors mb-3 text-lg">Chính sách bảo mật</button>
+                    <button onClick={() => onNavigateToLegal('terms')} className="text-green-200 hover:text-white hover:underline transition-colors text-lg">Điều khoản sử dụng</button>
                 </div>
             </div>
 
