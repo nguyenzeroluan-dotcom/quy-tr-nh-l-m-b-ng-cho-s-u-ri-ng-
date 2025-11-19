@@ -169,7 +169,7 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
       id: "lactobio",
       category: "protection",
       name: "LactoBio (Vi Sinh Đối Kháng)",
-      imageUrl: "https://chephamsinhhocbio.com/upload/images/che-pham-em-goc-bot.jpg", // Placeholder
+      imageUrl: "https://nongnghiepthuanthien.vn/wp-content/uploads/2019/10/12.jpg", // Placeholder
       description: "Tập đoàn vi sinh vật hữu ích đối kháng nấm bệnh.",
       benefits: [
           "Tiêu diệt nấm Phytophthora, Fusarium gây thối rễ.",
