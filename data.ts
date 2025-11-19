@@ -170,7 +170,7 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
       id: "ck90",
       category: "protection",
       name: "FMS - CÂY KHOẺ 90 (Thảo Mộc)",
-      imageUrl: "https://hoangminhagri.com/wp-content/uploads/2023/03/tinh-dau-thao-moc.jpg", // Placeholder
+      imageUrl: "https://lavish-kitty-16b.notion.site/image/attachment%3A4383321c-1bd0-42e0-b9d7-4a1b376f0c8e%3Az7196617249151_64b7794682ad385ce0223732703e0490.jpg?table=block&id=2b0a0a49-3a08-8058-b736-fecdb3914d84&spaceId=228174f8-4a60-4bbf-b8cf-11db580b1ecb&width=2000&userId=&cache=v2",
       description: "Chế phẩm xua đuổi và phòng trừ côn trùng từ tinh dầu thảo mộc.",
       benefits: [
           "Xua đuổi rầy xanh, bọ trĩ, nhện đỏ.",
