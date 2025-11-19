@@ -263,7 +263,33 @@ const timelineData: TimelineItemData[] = [
     products: ["CK70", "Trichoderma", "Cây khỏe 220", "Cây khỏe 90", "CK180", "CK320"],
     icon: DropletIcon,
     imageType: "soil",
-    imageUrl: "https://nongnghiepthuanthien.vn/wp-content/uploads/2021/11/thuoc-kich-re-sau-rieng.jpg.webp"
+    imageUrl: "https://nongnghiepthuanthien.vn/wp-content/uploads/2021/11/thuoc-kich-re-sau-rieng.jpg.webp",
+    richDetail: {
+      intro: "Hệ rễ khỏe mạnh là yếu tố tiên quyết cho một vụ mùa thắng lợi. Giai đoạn này tập trung vào việc tái tạo môi trường đất lý tưởng và kích thích bộ rễ cám phát triển mạnh mẽ sau thời gian mang trái.",
+      steps: [
+        {
+          title: "Bước 1: Tưới Kích Rễ & Phục Hồi",
+          content: "Sử dụng dòng sản phẩm Cây Khỏe (CK) kết hợp Humic tưới ướt đẫm vùng quanh tán. Hoạt chất hữu cơ sẽ kích thích các đầu rễ tơ (rễ trắng) bung ra mạnh mẽ để hút dinh dưỡng.",
+          icon: DropletIcon,
+          imageUrl: "https://nongnghiepthuanthien.vn/wp-content/uploads/2021/11/thuoc-kich-re-sau-rieng.jpg.webp"
+        },
+        {
+          title: "Bước 2: Cân Bằng pH Đất",
+          content: "pH đất thấp (axit) làm rễ kém phát triển và nấm bệnh dễ tấn công. Sử dụng sản phẩm nâng pH để đưa đất về ngưỡng 5.5 - 6.5, giúp cây hấp thu phân bón tối đa.",
+          icon: SettingsIcon
+        },
+        {
+          title: "Bước 3: Phân Hủy Hữu Cơ",
+          content: "Bổ sung tập đoàn vi sinh vật có lợi (Trichoderma, Bacillus) để phân giải nhanh xác bã thực vật, lá mục thành mùn hữu cơ tơi xốp, hạn chế ngộ độc hữu cơ cho rễ.",
+          icon: LeafIcon
+        },
+        {
+          title: "Bước 4: Phòng Ngừa Tuyến Trùng",
+          content: "Tưới thuốc trị tuyến trùng định kỳ để bảo vệ bộ rễ non mới ra. Tuyến trùng gây u sưng rễ, làm tắc mạch dẫn nhựa, khiến cây vàng lá và còi cọc.",
+          icon: SprayIcon
+        }
+      ]
+    }
   },
   {
     id: 3,
