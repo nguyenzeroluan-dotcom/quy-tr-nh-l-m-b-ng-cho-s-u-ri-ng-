@@ -5,14 +5,15 @@ import TimelineCard from '../features/TimelineCard';
 import { timelineData, TimelineItemData } from '../data';
 import { FilterButton, BackToTopButton } from '../components/UI';
 import FarmersmartLogo from '../components/Logo';
-import { BookOpenIcon } from '../components/Icons';
+import { BookOpenIcon, LeafIcon } from '../components/Icons';
 
 interface ListViewProps {
   onItemClick: (item: TimelineItemData) => void;
   onNavigateToBlog: () => void;
+  onNavigateToProducts: () => void;
 }
 
-const ListView: React.FC<ListViewProps> = ({ onItemClick, onNavigateToBlog }) => {
+const ListView: React.FC<ListViewProps> = ({ onItemClick, onNavigateToBlog, onNavigateToProducts }) => {
   const [filter, setFilter] = useState('all');
   
   // Smart Header State
@@ -135,6 +136,12 @@ const ListView: React.FC<ListViewProps> = ({ onItemClick, onNavigateToBlog }) =>
                         className="flex items-center gap-2 text-green-200 hover:text-white hover:underline transition-colors mb-2"
                     >
                         <BookOpenIcon className="w-4 h-4" /> Blog & Kỹ Thuật Canh Tác
+                    </button>
+                     <button 
+                        onClick={onNavigateToProducts}
+                        className="flex items-center gap-2 text-green-200 hover:text-white hover:underline transition-colors mb-2"
+                    >
+                        <LeafIcon className="w-4 h-4" /> Sản Phẩm & Dụng Cụ
                     </button>
                     <a href="#" className="text-green-200 hover:text-white hover:underline transition-colors mb-2">Chính sách bảo mật</a>
                     <a href="#" className="text-green-200 hover:text-white hover:underline transition-colors">Điều khoản sử dụng</a>

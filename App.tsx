@@ -5,13 +5,15 @@ import ListView from './views/ListView';
 import DetailView from './views/DetailView';
 import RecoveryWateringView from './views/RecoveryWateringView';
 import BlogView from './views/BlogView';
+import ProductsView from './views/ProductsView';
 import FarmersmartLogo from './components/Logo';
 import { BackToTopButton } from './components/UI';
 
 const App = () => {
-  const [view, setView] = useState<'list' | 'detail' | 'subpage' | 'blog'>('list');
+  const [view, setView] = useState<'list' | 'detail' | 'subpage' | 'blog' | 'products'>('list');
   const [selectedItem, setSelectedItem] = useState<TimelineItemData | null>(null);
   const [currentSubPageId, setCurrentSubPageId] = useState<string | null>(null);
+  const [selectedProductId, setSelectedProductId] = useState<string | undefined>(undefined);
 
   // Smart Header State
   const [showHeader, setShowHeader] = useState(true);
@@ -51,6 +53,7 @@ const App = () => {
       setView('list');
       setSelectedItem(null);
       setCurrentSubPageId(null);
+      setSelectedProductId(undefined);
       window.scrollTo(0, 0);
   };
 
@@ -69,6 +72,38 @@ const App = () => {
   const handleNavigateToBlog = () => {
       setView('blog');
       window.scrollTo(0, 0);
+  }
+
+  const handleNavigateToProducts = (productId?: string) => {
+      if (productId) {
+        setSelectedProductId(productId);
+      }
+      setView('products');
+      window.scrollTo(0, 0);
+  }
+
+  if (view === 'products') {
+     return (
+        <div className="min-h-screen">
+             <header 
+                className={`fixed top-0 w-full z-30 transition-all duration-300 ${
+                    showHeader ? 'translate-y-0' : '-translate-y-full'
+                } ${
+                    isAtTop 
+                    ? 'bg-white border-b border-gray-200 shadow-sm py-4' 
+                    : 'bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-md py-3'
+                }`}
+            >
+                <div className="container mx-auto px-4 flex justify-between items-center">
+                    <div className="flex items-center gap-2 cursor-pointer" onClick={handleBackToHome}>
+                        <FarmersmartLogo className="h-8 w-auto" />
+                    </div>
+                </div>
+             </header>
+             <ProductsView onBack={handleBackToHome} preselectedProductId={selectedProductId} />
+             <BackToTopButton />
+        </div>
+     )
   }
 
   if (view === 'blog') {
@@ -156,7 +191,11 @@ const App = () => {
       );
   }
 
-  return <ListView onItemClick={handleItemClick} onNavigateToBlog={handleNavigateToBlog} />;
+  return <ListView 
+            onItemClick={handleItemClick} 
+            onNavigateToBlog={handleNavigateToBlog}
+            onNavigateToProducts={() => handleNavigateToProducts()}
+         />;
 };
 
 export default App;

@@ -50,29 +50,173 @@ export type TimelineItemData = {
 export interface ProductInfo {
   id: string;
   name: string;
+  category: 'tool' | 'nutrition' | 'protection' | 'other'; // Added category
   imageUrl: string;
   description: string;
   benefits: string[];
   usage?: string;
 }
 
+// --- Categories Label Helper ---
+export const CATEGORY_LABELS: Record<string, string> = {
+    tool: "Dụng Cụ & Thiết Bị Đo",
+    nutrition: "Dinh Dưỡng & Cải Tạo Đất",
+    protection: "Bảo Vệ Thực Vật & Phòng Trừ Sâu Bệnh",
+    other: "Sản Phẩm Khác"
+};
+
 // --- Product Database ---
 export const PRODUCT_DB: Record<string, ProductInfo> = {
+  // --- DỤNG CỤ (TOOLS) ---
+  "ph_meter_dm15": {
+      id: "ph_meter_dm15",
+      category: "tool",
+      name: "Máy Đo pH và Độ Ẩm Đất Takemura DM-15",
+      imageUrl: "https://sieuthidienmaychinhhang.com/upload/images/thiet-bi-do/but-do-ph/550x550/1/May-do-pH-va-do-am-dat-Takemura-DM-15-Nhat-Ban-duoc-thiet-ke-gon-nhe.jpg",
+      description: "Thiết bị đo pH đất chuyên dụng từ Nhật Bản, không cần pin, độ chính xác cao.",
+      benefits: [
+          "Đo chính xác độ pH đất (1-8) và độ ẩm.",
+          "Không cần dùng pin, dễ sử dụng.",
+          "Đầu dò nhạy, bền bỉ với môi trường nông nghiệp.",
+          "Giúp bà con kiểm soát pH để xử lý đất kịp thời."
+      ],
+      usage: "Cắm ngập đầu kim loại vào đất ẩm, đợi 1 phút và đọc chỉ số."
+  },
+  "litmus_paper": {
+      id: "litmus_paper",
+      category: "tool",
+      name: "Giấy Quỳ Đo pH Nước (Tệp 80 lá)",
+      imageUrl: "https://cdn.hstatic.net/products/200001048938/b9ca3b64-19cf-459a-87ea-ed11230cc40d_ba75927a4f95480cb9780651103db237_master.jpg",
+      description: "Giải pháp kiểm tra nhanh độ pH của nước tưới và dung dịch pha thuốc.",
+      benefits: [
+          "Chi phí thấp, dễ sử dụng.",
+          "Kiểm tra nhanh pH nước trước khi pha thuốc BVTV.",
+          "Tránh hiện tượng kết tủa thuốc do pH nước không phù hợp."
+      ],
+      usage: "Nhúng giấy vào nước 1 giây, so màu với bảng màu đi kèm."
+  },
+
+  // --- DINH DƯỠNG (NUTRITION) ---
   "ck70": {
     id: "ck70",
-    name: "FMS - CÂY KHOẺ 70",
+    category: "nutrition",
+    name: "FMS - CÂY KHOẺ 70 (Tinh Vôi)",
     imageUrl: "https://lavish-kitty-16b.notion.site/image/attachment%3A4e4be20e-c1c3-46e2-a646-2a5d9d001ed8%3Ack70.jpg?table=block&id=2b0a0a49-3a08-8007-b34c-d76d683e759b&spaceId=228174f8-4a60-4bbf-b8cf-11db580b1ecb&width=1420&userId=&cache=v2", 
-    description: "VÔI TINH - BÍ QUYẾT HẠ PHÈN, MẶN. > 90% canxi, phụ gia.",
+    description: "VÔI TINH - BÍ QUYẾT HẠ PHÈN, MẶN. > 90% canxi, phụ gia đặc biệt.",
     benefits: [
       "Hạ phèn, mặn nhanh chóng sau 30 phút.",
-      "Giúp bộ rễ phát triển.",
+      "Giúp bộ rễ phát triển mạnh, chống bó rễ.",
       "Giúp cây hấp thu đầy đủ Đa trung vi lượng.",
       "Giúp cây kháng được nhiều bệnh gây hại.",
       "Vi sinh phân giải kali – cải thiện chất lượng quả."
     ],
     usage: "Pha 1kg với 1000 lít nước tưới đẫm."
+  },
+  "ck30": {
+      id: "ck30",
+      category: "nutrition",
+      name: "FMS - CÂY KHOẺ 30",
+      imageUrl: "https://cdn.nhanh.vn/cdn/store/26493/ps/20240108/8_1657849641_633.jpg", // Placeholder
+      description: "Chế phẩm sinh học cố định đạm, hòa tan lân, phân giải kali.",
+      benefits: [
+          "Cung cấp dinh dưỡng đa lượng tự nhiên từ vi sinh.",
+          "Giảm chi phí phân bón hóa học.",
+          "Giúp đất tơi xốp, thoáng khí."
+      ],
+      usage: "Pha 1 lít với 300 lít nước tưới ướt bộ rễ."
+  },
+  "ck320": {
+      id: "ck320",
+      category: "nutrition",
+      name: "FMS - CÂY KHOẺ 320 (Đạm Cá)",
+      imageUrl: "https://abichemical.com.vn/wp-content/uploads/2020/06/dam-ca-hoi-abi.jpg", // Placeholder
+      description: "Đạm cá thủy phân cô đặc, giàu Amino Acid.",
+      benefits: [
+          "Dưỡng lá xanh dày, bóng mượt.",
+          "Phục hồi cây suy yếu nhanh chóng.",
+          "Cung cấp đạm hữu cơ dễ hấp thu."
+      ],
+      usage: "Pha 1 lít với 400 lít nước tưới đều gốc cây."
+  },
+  "combi": {
+      id: "combi",
+      category: "nutrition",
+      name: "Vi Lượng Combi (Gói 25g)",
+      imageUrl: "https://nongnghiepthuanthien.vn/wp-content/uploads/2021/05/trung-vi-luong-combi-chelate-nong-nghiep-thuan-thien-5.jpg", // Placeholder
+      description: "Tổ hợp vi lượng dạng Chelate giúp cây hấp thụ hoàn toàn.",
+      benefits: [
+          "Khắc phục hiện tượng vàng lá do thiếu vi lượng.",
+          "Giúp trái xanh, gai đều, hạn chế méo trái.",
+          "Tăng sức đề kháng cho cây."
+      ],
+      usage: "Pha 1 gói 25g với 200 lít nước, phun đều trên cây."
+  },
+
+  // --- BẢO VỆ THỰC VẬT (PROTECTION) ---
+  "ck180": {
+      id: "ck180",
+      category: "protection",
+      name: "FMS - CÂY KHOẺ 180 (Nano Chitosan)",
+      imageUrl: "https://cf.shopee.vn/file/d3860b86836e41188690946692197851", // Placeholder
+      description: "Vắc xin thực vật - Phòng trừ nấm bệnh và vi khuẩn.",
+      benefits: [
+          "Cô lập vết bệnh, ngăn chặn nấm khuẩn lây lan.",
+          "Kích thích cơ chế tự vệ của cây trồng.",
+          "An toàn, không gây kháng thuốc."
+      ],
+      usage: "Pha 1 lít với 400 lít nước, phun đều hoặc tưới gốc."
+  },
+  "ck90": {
+      id: "ck90",
+      category: "protection",
+      name: "FMS - CÂY KHOẺ 90 (Thảo Mộc)",
+      imageUrl: "https://hoangminhagri.com/wp-content/uploads/2023/03/tinh-dau-thao-moc.jpg", // Placeholder
+      description: "Chế phẩm xua đuổi và phòng trừ côn trùng từ tinh dầu thảo mộc.",
+      benefits: [
+          "Xua đuổi rầy xanh, bọ trĩ, nhện đỏ.",
+          "Không gây nóng bông, nóng trái.",
+          "An toàn cho thiên địch và người sử dụng."
+      ],
+      usage: "Pha 1kg với 5 lít nước ngâm qua đêm, sau đó pha loãng với 400 lít nước phun."
+  },
+  "ck50": {
+      id: "ck50",
+      category: "protection",
+      name: "FMS - CÂY KHOẺ 50 (Bám Dính)",
+      imageUrl: "https://nongnghiepvietnam.org/wp-content/uploads/2019/08/chat-bam-dinh-sinh-hoc.jpg", // Placeholder
+      description: "Chất tăng lực bám dính sinh học.",
+      benefits: [
+          "Giúp thuốc loang trải đều và bám dính tốt trên bề mặt lá.",
+          "Hạn chế rửa trôi khi gặp mưa.",
+          "Tăng hiệu lực của thuốc BVTV và phân bón lá."
+      ],
+      usage: "Chai 500ml pha 800 lít nước."
+  },
+  "lactobio": {
+      id: "lactobio",
+      category: "protection",
+      name: "LactoBio (Vi Sinh Đối Kháng)",
+      imageUrl: "https://chephamsinhhocbio.com/upload/images/che-pham-em-goc-bot.jpg", // Placeholder
+      description: "Tập đoàn vi sinh vật hữu ích đối kháng nấm bệnh.",
+      benefits: [
+          "Tiêu diệt nấm Phytophthora, Fusarium gây thối rễ.",
+          "Phân giải rơm rạ, xác bã thực vật.",
+          "Cải tạo hệ vi sinh vật đất."
+      ],
+      usage: "Ngâm kích hoạt rồi pha loãng tưới gốc."
   }
 };
+
+// --- Helper Module for Product Links ---
+// Use this to get the correct ID structure for navigation
+export const ProductHelper = {
+    getAllProducts: () => Object.values(PRODUCT_DB),
+    getProductById: (id: string) => PRODUCT_DB[id],
+    getProductsByCategory: (cat: string) => Object.values(PRODUCT_DB).filter(p => p.category === cat),
+    // This returns a command object or string that the App can interpret
+    getLinkAction: (id: string) => ({ type: 'navigate_product', payload: id })
+};
+
 
 // --- Product Usage Dictionary (From Page 3) ---
 export const PRODUCT_USAGE_GUIDE: Record<string, { usage: string, note?: string }> = {
