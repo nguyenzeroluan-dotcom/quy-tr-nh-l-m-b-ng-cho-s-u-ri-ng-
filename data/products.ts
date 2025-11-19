@@ -1,4 +1,3 @@
-
 import { ProductInfo } from '../types';
 
 // --- Categories Label Helper ---
@@ -155,6 +154,20 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
   },
 
   // --- BẢO VỆ THỰC VẬT (PROTECTION) ---
+    "combo_phun": {
+    id: "combo_phun",
+    category: "protection",
+    name: "Combo Phun (CK90 + CK180 + CK50)",
+    imageUrl: "https://lavish-kitty-16b.notion.site/image/attachment%3Aaa09dbe4-b4c3-415e-b302-86d921b5f8d1%3Aimage.png?table=block&id=2b0a0a49-3a08-80da-8f66-fc0c33cb0b27&spaceId=228174f8-4a60-4bbf-b8cf-11db580b1ecb&width=1420&userId=&cache=v2",
+    description: "Bộ ba sản phẩm sinh học chuyên dùng phun lá, giúp quản lý côn trùng, phòng ngừa nấm bệnh và tăng cường hiệu quả thuốc nhờ chất bám dính.",
+    benefits: [
+        "Kết hợp 3 trong 1: Ngừa sâu bệnh, tăng đề kháng, và bám dính tốt.",
+        "CK90: Quản lý hiệu quả rầy xanh, bọ trĩ và các loại côn trùng chích hút.",
+        "CK180: Tăng cường sức đề kháng, giúp cây cứng cáp, chống chịu nấm bệnh và thời tiết bất lợi.",
+        "CK50: Tăng hiệu quả của thuốc, hạn chế rửa trôi khi gặp mưa."
+    ],
+    usage: "Pha chung 3 sản phẩm Cây Khỏe 90, 180, 50 theo liều lượng khuyến nghị trên từng sản phẩm để phun đều tán lá. Thường dùng cho 400-800 lít nước."
+  },
   "trichoderma": {
       id: "trichoderma",
       category: "protection",
@@ -239,6 +252,7 @@ export const findProductByName = (text: string): ProductInfo | null => {
        "ck90": "ck90", "cây khỏe 90": "ck90", "cây khoẻ 90": "ck90",
        "ck50": "ck50", "cây khỏe 50": "ck50", "cây khoẻ 50": "ck50",
        "ck220": "ck220", "cây khỏe 220": "ck220", "cây khoẻ 220": "ck220",
+       "combo phun": "combo_phun",
        "combi": "combi", "lactobio": "lactobio",
        "phân bò vi sinh": "phan_bo_vi_sinh", "dm15": "ph_meter_dm15",
        "ph": "litmus_paper",
@@ -267,9 +281,14 @@ export const PRODUCT_USAGE_GUIDE: Record<string, { usage: string, note?: string 
   "Cây khỏe 180": { usage: "Phun lá: 25ml/20L nước. Đổ gốc: 500ml/400L nước.", note: "Bổ sung Canxi & trung vi lượng" }, // Mapped from CK180
   "Cây khỏe 90": { usage: "Pha 1kg với 5 lít nước ngâm qua đêm, sau đó lấy pha với 400 lít nước phun đều trên cây.", note: "Trừ sâu sinh học, quản lý côn trùng" },
   "Cây khỏe 220": { usage: "Phòng: 5 lít/ha. Trị: 10 lít/ha.", note: "Ngừa tuyến trùng" },
+  "Combo Phun": { usage: "Pha chung CK90 + CK180 + CK50 để phun lá.", note: "Ngừa sâu, bệnh và tăng bám dính" },
   "LactoBio": { usage: "Pha hết gói sản phẩm với thùng nước uống tinh khiết 10 lít, ngâm 1-3 ngày, sau đó pha thêm 400 lít nước phun đều trên cây.", note: "Phòng trừ bệnh" },
   "Vi lượng Combi": { usage: "Pha 1 gói với 200 lít nước, Phun đều trên cây.", note: "Tăng cường vi lượng" },
   "Cây khỏe 50": { usage: "Chai 500ml pha 800 lít nước", note: "Tăng bám dính" },
+  "Trichoderma": { usage: "Pha với nước theo liều lượng khuyến cáo và tưới đều quanh gốc.", note: "Phòng bệnh, phân giải hữu cơ" },
+  "Phân bò vi sinh": { usage: "Bón lót hoặc bón thúc quanh gốc, liều lượng tùy theo độ tuổi và tình trạng cây.", note: "Bổ sung hữu cơ và vi sinh có lợi" },
+  "NPK 10-60-10": { usage: "Pha 5-10g/8 lít nước, định kỳ 7-10 ngày/lần. Phun vào sáng sớm hoặc chiều mát.", note: "Chuyên tạo mầm hoa" },
+  "KNO3": { usage: "Dùng để phun lá trong giai đoạn cây cần nhiều Kali như lúc làm bông, nuôi trái.", note: "Phá miên trạng, kích ra hoa đồng loạt" },
   "NPK 30-10-10": { usage: "URE = 3,6KG + DAP = 1,8KG + KALI = 0,6KG. Pha 1.500 lít nước tưới chung hệ thống tưới.", note: "Công thức pha 6kg hỗn hợp" },
   "NPK 20-20-15": { usage: "URE = 3KG + DAP = 2,8KG + KALI = 2,2KG. Pha 2.000 lít nước tưới chung hệ thống tưới.", note: "Công thức pha 8kg hỗn hợp" },
   "NPK 13-13-21": { usage: "URE = 2,4KG + DAP = 3KG + KALI = 4,6KG. Pha 2.500 lít nước tưới chung hệ thống tưới.", note: "Công thức pha 10kg hỗn hợp" },
