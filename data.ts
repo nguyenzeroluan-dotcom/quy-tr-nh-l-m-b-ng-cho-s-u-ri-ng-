@@ -219,6 +219,23 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
           "Cải tạo hệ vi sinh vật đất."
       ],
       usage: "Ngâm kích hoạt rồi pha loãng tưới gốc."
+  },
+  "ck220": {
+      id: "ck220",
+      category: "protection",
+      name: "FMS - CÂY KHOẺ 220",
+      imageUrl: "https://lavish-kitty-16b.notion.site/image/attachment%3A5bde7fd6-1bd1-4ce1-b44f-a7edabb60db1%3Az7196617622085_bf2cbfce3af41bdb442cab3d4808fe35.jpg?table=block&id=2b0a0a49-3a08-800b-8cc1-d181a3d0ba63&spaceId=228174f8-4a60-4bbf-b8cf-11db580b1ecb&width=2000&userId=&cache=v2",
+      description: "Vi khuẩn sinh học mới nhất chống lại tuyến trùng, cung cấp cho đất các loại nấm ăn thịt và nấm sợi để chống lại tác nhân gây bệnh từ gốc rễ.",
+      benefits: [
+        "Khắc phục hiện tượng xoắn ngọn, chùn đọt do thiếu vi lượng.",
+        "Tung mảng lưới săn bắt tuyến trùng tại vùng quanh bộ rễ.",
+        "Duy trì sự cân bằng lành mạnh của các vi khuẩn có lợi trong đất.",
+        "Ngăn ngừa hiện tượng vàng lá, rụng lá do tuyến trùng gây tổn thương hệ thống rễ.",
+        "Giải pháp tốt ưu cho những đất đai có lịch sử bệnh tuyến trùng.",
+        "Tăng năng suất cây trồng.",
+        "Tiết kiệm chi phí sản xuất."
+      ],
+      usage: "Phòng bệnh: 5 lít/ha (1 lít/200 gốc). Trị bệnh nặng: 10 lít/ha (1 lít/100 gốc). Dùng ngâm hạt giống, hom cành: 100ml/20 lít nước."
   }
 };
 
@@ -240,6 +257,7 @@ export const PRODUCT_USAGE_GUIDE: Record<string, { usage: string, note?: string 
   "Cây khỏe 320": { usage: "Pha 1 lít với 400 lít nước tưới đều gốc cây.", note: "Đạm cá" },
   "Cây khỏe 180": { usage: "Pha 1 lít với 400 lít nước, phun đều trên cây.", note: "Phòng trừ bệnh" }, // Mapped from CK180
   "Cây khỏe 90": { usage: "Pha 1kg với 5 lít nước ngâm qua đêm, sau đó lấy pha với 400 lít nước phun đều trên cây.", note: "Trừ sâu sinh học, quản lý côn trùng" },
+  "Cây khỏe 220": { usage: "Phòng: 5 lít/ha. Trị: 10 lít/ha.", note: "Ngừa tuyến trùng" },
   "LactoBio": { usage: "Pha hết gói sản phẩm với thùng nước uống tinh khiết 10 lít, ngâm 1-3 ngày, sau đó pha thêm 400 lít nước phun đều trên cây.", note: "Phòng trừ bệnh" },
   "Vi lượng Combi": { usage: "Pha 1 gói với 200 lít nước, Phun đều trên cây.", note: "Tăng cường vi lượng" },
   "Cây khỏe 50": { usage: "Chai 500ml pha 800 lít nước", note: "Tăng bám dính" },
