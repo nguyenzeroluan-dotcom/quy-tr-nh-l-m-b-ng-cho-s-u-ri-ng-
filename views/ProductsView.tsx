@@ -1,42 +1,53 @@
+
 import React, { useState, useEffect } from 'react';
 import { Breadcrumb, FilterButton } from '../components/UI';
 import { ProductInfo } from '../types';
-import { PRODUCT_DB, CATEGORY_LABELS } from '../data/products';
-import { BaseModal } from '../components/Modal';
+import { dataManager } from '../lib/DataManager'; 
+import { CATEGORY_LABELS } from '../data/products';
 import { ProductModal } from '../components/ProductModal';
-import { CheckCircleIcon, LeafIcon, SprayIcon, DropletIcon } from '../components/Icons';
+import { PlusIcon } from '../components/Icons';
 
 const ProductsView = ({ onBack, preselectedProductId }: { onBack: () => void, preselectedProductId?: string }) => {
     const [filter, setFilter] = useState('all');
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedProduct, setSelectedProduct] = useState<ProductInfo | null>(null);
     const [showProductModal, setShowProductModal] = useState(false);
+    const [loading, setLoading] = useState(true);
+    
+    // State for products (now dynamic from DataManager)
+    const [products, setProducts] = useState<ProductInfo[]>([]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        // Load products async
+        dataManager.getProducts().then(data => {
+            setProducts(data);
+            setLoading(false);
+        });
     }, []);
 
     // Handle direct linking to a product if ID is passed
     useEffect(() => {
-        if (preselectedProductId && PRODUCT_DB[preselectedProductId]) {
-            setSelectedProduct(PRODUCT_DB[preselectedProductId]);
-            setShowProductModal(true);
+        if (preselectedProductId && products.length > 0) {
+            const found = products.find(p => p.id === preselectedProductId);
+            if (found) {
+                setSelectedProduct(found);
+                setShowProductModal(true);
+            }
         }
-    }, [preselectedProductId]);
+    }, [preselectedProductId, products]);
 
     // Filter Logic
-    const allProducts = Object.values(PRODUCT_DB);
-    const filteredProducts = allProducts.filter(product => {
+    const filteredProducts = products.filter(product => {
         const matchesCategory = filter === 'all' || product.category === filter;
         const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                               product.description.toLowerCase().includes(searchQuery.toLowerCase());
         return matchesCategory && matchesSearch;
     });
 
-    const handleCopyLink = (id: string) => {
-        navigator.clipboard.writeText(id);
-        alert(`Đã sao chép mã sản phẩm: ${id}`);
-    };
+    if (loading) {
+        return <div className="min-h-screen flex items-center justify-center text-green-600">Đang tải dữ liệu sản phẩm...</div>;
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 pb-20">

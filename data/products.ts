@@ -1,3 +1,4 @@
+
 import { ProductInfo } from '../types';
 
 // --- Categories Label Helper ---
@@ -154,19 +155,18 @@ export const PRODUCT_DB: Record<string, ProductInfo> = {
   },
 
   // --- BẢO VỆ THỰC VẬT (PROTECTION) ---
-    "combo_phun": {
+  "combo_phun": {
     id: "combo_phun",
     category: "protection",
     name: "Combo Phun (CK90 + CK180 + CK50)",
     imageUrl: "https://lavish-kitty-16b.notion.site/image/attachment%3Aaa09dbe4-b4c3-415e-b302-86d921b5f8d1%3Aimage.png?table=block&id=2b0a0a49-3a08-80da-8f66-fc0c33cb0b27&spaceId=228174f8-4a60-4bbf-b8cf-11db580b1ecb&width=1420&userId=&cache=v2",
-    description: "Bộ ba sản phẩm sinh học chuyên dùng phun lá, giúp quản lý côn trùng, phòng ngừa nấm bệnh và tăng cường hiệu quả thuốc nhờ chất bám dính.",
+    description: "Bộ giải pháp phun lá toàn diện: Ngừa côn trùng, phòng bệnh và tăng bám dính.",
     benefits: [
-        "Kết hợp 3 trong 1: Ngừa sâu bệnh, tăng đề kháng, và bám dính tốt.",
-        "CK90: Quản lý hiệu quả rầy xanh, bọ trĩ và các loại côn trùng chích hút.",
-        "CK180: Tăng cường sức đề kháng, giúp cây cứng cáp, chống chịu nấm bệnh và thời tiết bất lợi.",
-        "CK50: Tăng hiệu quả của thuốc, hạn chế rửa trôi khi gặp mưa."
+        "Cây khỏe 90 (Phun): Ngừa côn trùng gây hại.",
+        "Cây khỏe 180 (Phun): Phòng bệnh.",
+        "Cây khỏe 50 (Phun): Bám dính."
     ],
-    usage: "Pha chung 3 sản phẩm Cây Khỏe 90, 180, 50 theo liều lượng khuyến nghị trên từng sản phẩm để phun đều tán lá. Thường dùng cho 400-800 lít nước."
+    usage: "Pha chung 3 sản phẩm theo liều lượng: CK90 (1kg/400L) + CK180 (1L/400L) + CK50 (500ml/800L) phun đều tán lá."
   },
   "trichoderma": {
       id: "trichoderma",

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { TimelineItemData } from './types';
 import { LegalPageContent, PRIVACY_POLICY_CONTENT, TERMS_OF_USE_CONTENT } from './legal-data';
@@ -9,8 +10,9 @@ import RecoveryWateringView from './views/RecoveryWateringView';
 import BlogView from './views/BlogView';
 import ProductsView from './views/ProductsView';
 import LegalView from './views/LegalView';
+import AdminView from './views/AdminView';
 
-type ViewState = 'list' | 'detail' | 'subpage' | 'blog' | 'products' | 'legal';
+type ViewState = 'list' | 'detail' | 'subpage' | 'blog' | 'products' | 'legal' | 'admin';
 
 const App = () => {
     const [view, setView] = useState<ViewState>('list');
@@ -63,16 +65,35 @@ const App = () => {
         window.scrollTo(0, 0);
     };
     
+    // Admin Login Trigger
+    const handleAdminClick = () => {
+        setView('admin');
+    }
+
     // ListView is special, it has its own header and footer layout
     if (view === 'list') {
         return (
-            <ListView
-                onItemClick={handleItemClick}
-                onNavigateToBlog={handleNavigateToBlog}
-                onNavigateToProducts={handleNavigateToProducts}
-                onNavigateToLegal={handleNavigateToLegal}
-            />
+            <>
+                <ListView
+                    onItemClick={handleItemClick}
+                    onNavigateToBlog={handleNavigateToBlog}
+                    onNavigateToProducts={handleNavigateToProducts}
+                    onNavigateToLegal={handleNavigateToLegal}
+                />
+                {/* Secret Admin Button at bottom left for Demo */}
+                <button 
+                    onClick={handleAdminClick} 
+                    className="fixed bottom-2 left-2 opacity-20 hover:opacity-100 z-50 text-xs bg-gray-800 text-white px-3 py-1 rounded-full transition-opacity"
+                    title="Truy cập trang quản trị"
+                >
+                    Admin
+                </button>
+            </>
         );
+    }
+
+    if (view === 'admin') {
+        return <AdminView onBack={resetToHome} />;
     }
 
     // All other views use the MainLayout

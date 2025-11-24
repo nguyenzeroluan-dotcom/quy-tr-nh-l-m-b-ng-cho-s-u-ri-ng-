@@ -1,0 +1,54 @@
+
+-- Bạn hãy copy toàn bộ đoạn code này và Paste vào SQL Editor của Neon Dashboard
+-- Sau đó nhấn nút RUN để tạo bảng dữ liệu.
+
+-- 1. Tạo bảng Sản Phẩm (Products)
+CREATE TABLE IF NOT EXISTS products (
+    id VARCHAR(50) PRIMARY KEY, -- Mã sản phẩm (ví dụ: ck70, combi)
+    category VARCHAR(20) NOT NULL, -- tool, nutrition, protection, other
+    name VARCHAR(255) NOT NULL,
+    image_url TEXT,
+    description TEXT,
+    usage_guide TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 2. Tạo bảng Lợi Ích Sản Phẩm (Benefits) - Quan hệ 1-nhiều với products
+CREATE TABLE IF NOT EXISTS product_benefits (
+    id SERIAL PRIMARY KEY,
+    product_id VARCHAR(50) REFERENCES products(id) ON DELETE CASCADE,
+    benefit_text TEXT NOT NULL
+);
+
+-- 3. Tạo bảng Quy Trình (Timeline)
+CREATE TABLE IF NOT EXISTS timeline_items (
+    id SERIAL PRIMARY KEY,
+    day_label VARCHAR(50), -- Ví dụ: "01/10/2025"
+    stage VARCHAR(20), -- recovery, growth, flowering
+    stage_label VARCHAR(100),
+    title VARCHAR(255),
+    action_text TEXT,
+    purpose_text TEXT,
+    image_type VARCHAR(50),
+    image_url TEXT,
+    total_cost NUMERIC(15, 2) DEFAULT 0
+);
+
+-- 4. Tạo bảng Chi Tiết Vật Tư trong Quy Trình
+CREATE TABLE IF NOT EXISTS timeline_product_details (
+    id SERIAL PRIMARY KEY,
+    timeline_id INTEGER REFERENCES timeline_items(id) ON DELETE CASCADE,
+    product_name VARCHAR(255), -- Tên dùng để hiển thị và link
+    purpose VARCHAR(255),
+    dosage VARCHAR(255),
+    unit VARCHAR(20),
+    quantity NUMERIC(10, 2),
+    total_cost NUMERIC(15, 2)
+);
+
+-- 5. (Tùy chọn) Bảng Users Admin
+CREATE TABLE IF NOT EXISTS admins (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL
+);

@@ -1,7 +1,8 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import CarouselHeader from '../features/CarouselHeader';
 import TimelineCard from '../features/TimelineCard';
-import { timelineData } from '../data/timeline';
+import { dataManager } from '../lib/DataManager'; 
 import { TimelineItemData } from '../types';
 import { FilterButton, BackToTopButton } from '../components/UI';
 import FarmersmartLogo from '../components/Logo';
@@ -16,6 +17,8 @@ interface ListViewProps {
 
 const ListView: React.FC<ListViewProps> = ({ onItemClick, onNavigateToBlog, onNavigateToProducts, onNavigateToLegal }) => {
   const [filter, setFilter] = useState('all');
+  const [items, setItems] = useState<TimelineItemData[]>([]);
+  const [loading, setLoading] = useState(true);
   
   // Smart Header State
   const [showHeader, setShowHeader] = useState(true);
@@ -23,6 +26,12 @@ const ListView: React.FC<ListViewProps> = ({ onItemClick, onNavigateToBlog, onNa
   const lastScrollY = useRef(0);
 
   useEffect(() => {
+    // Load timeline data from DataManager (Async)
+    dataManager.getTimeline().then(data => {
+        setItems(data);
+        setLoading(false);
+    });
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
@@ -47,8 +56,12 @@ const ListView: React.FC<ListViewProps> = ({ onItemClick, onNavigateToBlog, onNa
   }, []);
 
   const filteredData = filter === 'all' 
-    ? timelineData 
-    : timelineData.filter(item => item.stage === filter);
+    ? items 
+    : items.filter(item => item.stage === filter);
+
+  if (loading) {
+     return <div className="min-h-screen flex items-center justify-center bg-green-50 text-green-800">Đang tải quy trình...</div>;
+  }
 
   return (
     <div className="min-h-screen pb-20 bg-gradient-to-b from-green-50 to-white">
