@@ -7,7 +7,7 @@ const app = express();
 const PORT = 3001; // Server chạy cổng 3001, React chạy 3000
 
 app.use(cors() as any); // Cho phép Frontend gọi API
-app.use(express.json());
+app.use(express.json() as any);
 
 // --- API SẢN PHẨM ---
 

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TimelineItemData } from './types';
 import { LegalPageContent, PRIVACY_POLICY_CONTENT, TERMS_OF_USE_CONTENT } from './legal-data';
 
@@ -21,6 +21,14 @@ const App = () => {
     const [selectedProductId, setSelectedProductId] = useState<string | undefined>(undefined);
     const [legalPageContent, setLegalPageContent] = useState<LegalPageContent | null>(null);
 
+    // Kiểm tra URL khi mới vào web. Nếu có ?mode=admin thì vào thẳng admin
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('mode') === 'admin') {
+            setView('admin');
+        }
+    }, []);
+
     const resetToHome = () => {
         setView('list');
         setSelectedItem(null);
@@ -28,6 +36,8 @@ const App = () => {
         setSelectedProductId(undefined);
         setLegalPageContent(null);
         window.scrollTo(0, 0);
+        // Xóa query param nếu có để URL sạch đẹp
+        window.history.replaceState({}, document.title, "/");
     };
     
     const handleItemClick = (item: TimelineItemData) => {
@@ -73,22 +83,13 @@ const App = () => {
     // ListView is special, it has its own header and footer layout
     if (view === 'list') {
         return (
-            <>
-                <ListView
-                    onItemClick={handleItemClick}
-                    onNavigateToBlog={handleNavigateToBlog}
-                    onNavigateToProducts={handleNavigateToProducts}
-                    onNavigateToLegal={handleNavigateToLegal}
-                />
-                {/* Secret Admin Button at bottom left for Demo */}
-                <button 
-                    onClick={handleAdminClick} 
-                    className="fixed bottom-2 left-2 opacity-20 hover:opacity-100 z-50 text-xs bg-gray-800 text-white px-3 py-1 rounded-full transition-opacity"
-                    title="Truy cập trang quản trị"
-                >
-                    Admin
-                </button>
-            </>
+            <ListView
+                onItemClick={handleItemClick}
+                onNavigateToBlog={handleNavigateToBlog}
+                onNavigateToProducts={handleNavigateToProducts}
+                onNavigateToLegal={handleNavigateToLegal}
+                onNavigateToAdmin={handleAdminClick}
+            />
         );
     }
 
@@ -139,6 +140,7 @@ const App = () => {
                 onNavigateToBlog={handleNavigateToBlog}
                 onNavigateToProducts={handleNavigateToProducts}
                 onNavigateToLegal={handleNavigateToLegal}
+                onNavigateToAdmin={handleAdminClick}
             />
         );
     }

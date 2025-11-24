@@ -42,7 +42,7 @@ class DataManager {
             });
         } catch (e) {
             console.error("Error saving product", e);
-            alert("Lỗi kết nối Server.");
+            throw e;
         }
     }
 
@@ -53,7 +53,7 @@ class DataManager {
             });
         } catch (e) {
             console.error("Error deleting product", e);
-            alert("Lỗi kết nối Server.");
+            throw e;
         }
     }
 
@@ -82,6 +82,30 @@ class DataManager {
         } catch (e) {
             console.warn("API Error/Offline. Fallback to static data.", e);
             return timelineData;
+        }
+    }
+
+    async saveTimelineItem(item: TimelineItemData): Promise<void> {
+        try {
+            await fetch(`${API_URL}/timeline`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(item)
+            });
+        } catch (e) {
+            console.error("Error saving timeline", e);
+            throw e;
+        }
+    }
+
+    async deleteTimelineItem(id: number): Promise<void> {
+        try {
+            await fetch(`${API_URL}/timeline/${id}`, {
+                method: 'DELETE'
+            });
+        } catch (e) {
+            console.error("Error deleting timeline item", e);
+            throw e;
         }
     }
 

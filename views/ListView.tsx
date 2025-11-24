@@ -6,16 +6,17 @@ import { dataManager } from '../lib/DataManager';
 import { TimelineItemData } from '../types';
 import { FilterButton, BackToTopButton } from '../components/UI';
 import FarmersmartLogo from '../components/Logo';
-import { BookOpenIcon, LeafIcon } from '../components/Icons';
+import { BookOpenIcon, LeafIcon, SettingsIcon } from '../components/Icons';
 
 interface ListViewProps {
   onItemClick: (item: TimelineItemData) => void;
   onNavigateToBlog: () => void;
   onNavigateToProducts: () => void;
   onNavigateToLegal: (page: 'privacy' | 'terms') => void;
+  onNavigateToAdmin: () => void;
 }
 
-const ListView: React.FC<ListViewProps> = ({ onItemClick, onNavigateToBlog, onNavigateToProducts, onNavigateToLegal }) => {
+const ListView: React.FC<ListViewProps> = ({ onItemClick, onNavigateToBlog, onNavigateToProducts, onNavigateToLegal, onNavigateToAdmin }) => {
   const [filter, setFilter] = useState('all');
   const [items, setItems] = useState<TimelineItemData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -162,9 +163,17 @@ const ListView: React.FC<ListViewProps> = ({ onItemClick, onNavigateToBlog, onNa
                 </div>
             </div>
 
-            <div className="border-t border-green-800 pt-8 text-center text-green-400">
+            <div className="border-t border-green-800 pt-8 flex flex-col items-center justify-center text-green-400 gap-4">
                <p>© 2025 Công Ty Cổ Phần Farmersmart. All rights reserved.</p>
-               <p className="mt-2 text-sm italic opacity-70">Lưu ý: Quy trình và liều lượng có thể thay đổi tùy theo diễn biến thực tế của thời tiết và sức khỏe cây trồng.</p>
+               <p className="text-sm italic opacity-70">Lưu ý: Quy trình và liều lượng có thể thay đổi tùy theo diễn biến thực tế của thời tiết và sức khỏe cây trồng.</p>
+               
+               {/* Admin Link */}
+               <button 
+                onClick={onNavigateToAdmin}
+                className="flex items-center gap-1 text-xs uppercase tracking-widest text-green-700 bg-green-950 px-3 py-1 rounded hover:bg-green-800 hover:text-white transition-colors mt-2"
+               >
+                 <SettingsIcon className="w-3 h-3" /> Quản Trị Hệ Thống
+               </button>
             </div>
          </div>
       </footer>
